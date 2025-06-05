@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -39,6 +40,13 @@ public class ProyectoService {
     @Transactional
     public ProyectoResponseDTO createProyecto (ProyectoRequestDTO proyectoRequestDTO) {
         Proyecto proyecto = proyectoMapper.convertToEntity(proyectoRequestDTO);
+        proyecto.setFFechaRegistro(LocalDateTime.now());
+
+
+        if (proyectoRequestDTO.getCorteId() != null) {
+
+        }
+
         proyectoRepository.save(proyecto);
         return proyectoMapper.convertToDTO(proyecto);
     }
@@ -48,15 +56,17 @@ public class ProyectoService {
         Proyecto proyecto = proyectoRepository.findById(proyectopk)
                 .orElseThrow(()-> new RuntimeException("Proyecto no encontrado"+proyectopk));
         proyecto.setXnombreProyecto(proyectoRequestDTO.getXnombreproyecto());
-
         proyecto.setXproblematica(proyectoRequestDTO.getXproblematica());
         proyecto.setXresumen(proyectoRequestDTO.getXresumen());
         proyecto.setXobjetivoGeneral(proyectoRequestDTO.getXobjetivogeneral());
+
         proyecto.setXinnovacion(proyectoRequestDTO.getXinnovacion());
         proyecto.setXimpacto(proyectoRequestDTO.getXimpacto());
         proyecto.setXsostenibilidad(proyectoRequestDTO.getXsostenibilidad());
         proyecto.setXreplicabilidad(proyectoRequestDTO.getXreplicabilidad());
 
+        Integer npeso = proyecto.getXimpacto()+ proyecto.getXinnovacion()+ proyecto.getXsostenibilidad()+ proyecto.getXreplicabilidad();
+        proyecto.setNpeso(npeso);
 
         proyecto=proyectoRepository.save(proyecto);
         return proyectoMapper.convertToDTO(proyecto);

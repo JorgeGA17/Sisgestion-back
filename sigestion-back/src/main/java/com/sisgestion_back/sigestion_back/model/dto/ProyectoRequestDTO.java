@@ -40,24 +40,18 @@ public class ProyectoRequestDTO {
     private String npublicacion;
 
     @NotNull(message = "ID de la corte es requerido")
-    private Long corteId;
+    private Integer corteId;
     @NotNull(message = "ID del estado es requerido")
-    private Long estadoId;
+    private Integer estadoId;
 
     @NotEmpty(message = "La lista de especialidades es requerida")
-    private List<Long> EspecialidadIds;
+    private List<Long> especialidadIds;
     @NotEmpty(message = "La lista de jerarquias es requerida")
-    private List<Long> JerarquiaIds;
+    private List<Long> jerarquiaIds;
     @NotEmpty(message = "La lista de ejes es requerida")
-    private List<Long> EjeIds;
-    @NotEmpty(message = "La lista de etiquetas es requerida")
-    private List<Long> EtiquetaIds;
+    private List<Long> ejeIds;
+   // @NotEmpty(message = "La lista de etiquetas es requerida")
+    //private List<Long> etiquetaIds;
     @NotEmpty(message = "La lista de personas es requerida")
-    private List<Long> PersonalIds;
-
-
-
-
-
-
+    private List<Long> personalIds;
 }

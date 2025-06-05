@@ -35,6 +35,7 @@ public class PersonalService {
     @Transactional
     public PersonalResponseDTO createPersonal(PersonalRequestDTO personalRequestDTO) {
         Personal personal = personalMapper.convertToEntity(personalRequestDTO);
+        personal.setXnombreCompleto(personal.getXnombre() + " " + personal.getXapellido());
         personal.setFFechaRegistro(LocalDateTime.now());
         personalRepository.save(personal);
         return personalMapper.convertToDTO(personal);
@@ -44,9 +45,10 @@ public class PersonalService {
     public PersonalResponseDTO updatePersonal(Long personalPk, PersonalRequestDTO personalRequestDTO) {
         Personal personal = personalRepository.findById(personalPk)
                 .orElseThrow(() -> new RuntimeException("Personal no encontrado" + personalPk));
-        personal.setXnombreCompleto(personalRequestDTO.getXnombreCompleto());
+
         personal.setXnombre(personalRequestDTO.getXnombre());
         personal.setXapellido(personalRequestDTO.getXapellido());
+        personal.setXnombreCompleto(personal.getXnombre() + " " + personal.getXapellido());
         personal.setXcorreoInstitucional(personalRequestDTO.getXcorreoInstitucional());
         personal.setNnumeroDocumento(personalRequestDTO.getNnumeroDocumento());
         personal.setXtipoDocumento(personalRequestDTO.getXtipoDocumento());

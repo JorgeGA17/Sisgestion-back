@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -28,5 +29,5 @@ public class Cargo {
     private LocalDateTime fFechaRegistro;
 
     @OneToMany (mappedBy = "cargofk", cascade = CascadeType.ALL)
-    private List<Miembro> miembros;
+    private List<Miembro> miembros= new ArrayList<>();
 }

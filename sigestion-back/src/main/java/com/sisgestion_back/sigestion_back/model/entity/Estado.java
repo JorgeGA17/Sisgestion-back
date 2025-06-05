@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -36,5 +37,5 @@ public class Estado {
 
     @OneToMany(mappedBy = "estadofk", cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<Proyecto> proyectos;
+    private List<Proyecto> proyectos= new ArrayList<>();
 }

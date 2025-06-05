@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -29,10 +30,10 @@ public class Periodo {
     private LocalDateTime fFechaRegistro;
 
     @OneToMany (mappedBy = "periodofk", cascade = CascadeType.ALL)
-    private List<Comision> comisiones;
+    private List<Comision> comisiones= new ArrayList<>();
 
     @OneToMany (mappedBy = "periodofk", cascade = CascadeType.ALL)
-    private List<Presidente> presidentes;
+    private List<Presidente> presidentes= new ArrayList<>();
 
 }
 

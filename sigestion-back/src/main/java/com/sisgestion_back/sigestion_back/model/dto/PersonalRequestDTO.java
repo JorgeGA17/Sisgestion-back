@@ -12,7 +12,6 @@ public class PersonalRequestDTO {
 
     private String xtipoDocumento;
     private String nnumeroDocumento;
-    private String xnombreCompleto;
     private String xnombre;
     private String xapellido;
     private String xocupacion;

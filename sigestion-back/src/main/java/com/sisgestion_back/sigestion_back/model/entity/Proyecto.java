@@ -59,12 +59,10 @@ public class Proyecto {
 
     @ManyToOne
     @JoinColumn(name = "corte_fk")
-    @JsonBackReference
     private Corte cortefk;
 
     @ManyToOne
     @JoinColumn(name = "estado_proyecto_fk")
-    @JsonBackReference
     private Estado estadofk;
 
 

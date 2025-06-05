@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -48,11 +49,9 @@ public class Personal {
 
 
     @OneToMany (mappedBy = "personalfk", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<Presidente> presidentes;
+    private List<Presidente> presidentes= new ArrayList<>();
 
     @OneToMany (mappedBy = "personalfk", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<Miembro> miembros;
+    private List<Miembro> miembros= new ArrayList<>();
 
 }

@@ -36,9 +36,18 @@ public class ProyectoResponseDTO {
     private Long corteId;
     private Long estadoId;
 
+    private List<Long> especialidadIds;
     private List<String> listaEspecialidades;
+
+    private List<Long> jerarquiaIds;
     private List<String>  listaJerarquias;
+
+    private List<Long> ejeIds;
     private List<String>  listaEjes;
-    private List<String>  listaEtiquetas;
+
+
+    //private List<String>  listaEtiquetas;
+
+    private List<Long> personalIds;
     private List<String>  listaPersonal;
 }

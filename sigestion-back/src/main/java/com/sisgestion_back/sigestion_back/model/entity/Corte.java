@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -34,11 +35,11 @@ public class Corte {
     private LocalDateTime fFechaRegistro;
 
   @OneToMany (mappedBy = "cortefk", cascade = CascadeType.DETACH)
-  private List<Proyecto> proyectos;
+  private List<Proyecto> proyectos= new ArrayList<>();
 
   @OneToMany (mappedBy = "cortefk", cascade = CascadeType.DETACH)
-  private List<Comision> comisiones;
+  private List<Comision> comisiones= new ArrayList<>();
 
   @OneToMany (mappedBy = "cortefk", cascade = CascadeType.DETACH)
-  private List<Presidente> presidentes;
+  private List<Presidente> presidentes= new ArrayList<>();
 }
