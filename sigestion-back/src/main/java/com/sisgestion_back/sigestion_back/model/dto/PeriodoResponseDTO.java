@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -12,9 +13,8 @@ import java.time.Instant;
 
 public class PeriodoResponseDTO {
     private Long periodoPk;
-    private String xNombre;
-    private String nEstado;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
+    private String xnombre;
+    private LocalDateTime fFechaRegistro;
+
 
 }

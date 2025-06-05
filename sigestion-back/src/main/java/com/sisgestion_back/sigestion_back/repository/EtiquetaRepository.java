@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface EtiquetaRepository extends JpaRepository<Etiqueta, Long> {
-    Optional<Etiqueta> findByxNombre(String xNombre);
+
 }

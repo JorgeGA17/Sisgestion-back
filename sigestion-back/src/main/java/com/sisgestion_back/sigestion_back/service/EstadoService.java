@@ -42,9 +42,8 @@ public class EstadoService {
     public  EstadoResponseDTO updateEstado (Long estadoPk, EstadoRequestDTO estadoRequestDTO) {
         Estado estado = estadoRepository.findById(estadoPk)
                 .orElseThrow(()-> new RuntimeException("Estado no encontrada"+estadoPk));
-        estado.setXNombre(estadoRequestDTO.getXNombre());
-        estado.setXSlug(estadoRequestDTO.getXSlug());
-        estado.setXResumen(estadoRequestDTO.getXResumen());
+        estado.setXnombre(estadoRequestDTO.getXnombre());
+        estado.setXresumen(estadoRequestDTO.getXresumen());
         estado=estadoRepository.save(estado);
         return estadoMapper.convertToDTO(estado);
     }

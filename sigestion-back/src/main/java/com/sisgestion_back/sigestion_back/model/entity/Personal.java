@@ -7,18 +7,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "personal", schema = "schconfiguracion")
+@Table(name = "personal")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Personal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "personal_pk", nullable = false)
+    @Column(name = "personal_pk")
     private Long personalPk;
 
     @Column(name = "x_tipo_documento")
@@ -41,6 +42,10 @@ public class Personal {
 
     @Column(name = "x_correo_institucional")
     private String xcorreoInstitucional;
+
+    @Column(name = "f_fecha_registro")
+    private LocalDateTime fFechaRegistro;
+
 
     @OneToMany (mappedBy = "personalfk", cascade = CascadeType.ALL)
     @JsonBackReference

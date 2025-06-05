@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface CorteRepository extends JpaRepository<Corte, Long> {
-    Optional<Corte> findByxNombre(String xNombre);
+
 }

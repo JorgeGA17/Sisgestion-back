@@ -7,11 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "comision", schema = "schconfiguracion")
+@Table(name = "comision")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comision {
@@ -22,32 +23,20 @@ public class Comision {
     private Long comisionPk;
 
     @Column(name = "x_descripcion")
-    private String xDescripcion;
-
-    @Column(name = "x_resolucion")
-    private String xResolucion;
-
-    @Column(name = "n_estado")
-    private String nEstado;
+    private String xdescripcion;
 
     @Column(name = "f_fecha_registro")
-    private Instant fFechaRegistro;
+    private LocalDateTime fFechaRegistro;
 
-    @Column(name = "f_fecha_modificacion")
-    private Instant fFechaModificacion;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinColumn(name = "corte_fk")
-    @JsonBackReference
     private Corte cortefk;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinColumn(name = "periodo_fk")
-    @JsonBackReference
     private Periodo periodofk;
 
     @OneToMany (mappedBy = "comisionfk", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<Miembro> miembros;
 
 }

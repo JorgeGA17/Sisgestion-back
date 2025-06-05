@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ComisionRepository extends JpaRepository<Comision,Long> {
-    Optional<Comision> findByxDescripcion(String xDescripcion);
+
 }

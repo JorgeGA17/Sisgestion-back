@@ -8,15 +8,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class MiembroResponseDTO {
     private Long miembroPk;
-    private String nEstado;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
+    private LocalDateTime fFechaRegistro;
     private Comision comisionfk;
     private Personal personalfk;
     private Cargo cargofk;

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -34,6 +35,7 @@ public class EtiquetaService {
     @Transactional
     public EtiquetaResponseDTO createEtiqueta(EtiquetaRequestDTO etiquetaRequestDTO) {
         Etiqueta etiqueta = etiquetaMapper.convertToEntity(etiquetaRequestDTO);
+        etiqueta.setFFechaRegistro(LocalDateTime.now());
         etiquetaRepository.save(etiqueta);
         return etiquetaMapper.convertToDTO(etiqueta);
     }
@@ -42,7 +44,7 @@ public class EtiquetaService {
     public EtiquetaResponseDTO updateEtiqueta(Long etiquetaPk, EtiquetaRequestDTO etiquetaRequestDTO) {
         Etiqueta etiqueta = etiquetaRepository.findById(etiquetaPk)
                 .orElseThrow(() -> new RuntimeException("Etiqueta no encontrada" + etiquetaPk));
-        etiqueta.setXNombre(etiquetaRequestDTO.getXNombre());
+        etiqueta.setXnombre(etiquetaRequestDTO.getXnombre());
         etiqueta = etiquetaRepository.save(etiqueta);
         return etiquetaMapper.convertToDTO(etiqueta);
     }

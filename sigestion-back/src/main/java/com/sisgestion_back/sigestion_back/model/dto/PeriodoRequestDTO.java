@@ -5,15 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PeriodoRequestDTO {
+    private String xnombre;
+    private LocalDateTime fFechaRegistro;
 
-    private String xNombre;
-    private String nEstado;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
 
 }

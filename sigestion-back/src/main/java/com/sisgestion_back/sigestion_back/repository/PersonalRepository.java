@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface PersonalRepository extends JpaRepository<Personal, Long> {
-    Optional<Personal> findByxnombreCompleto(String xnombreCompleto);
+
 }

@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,6 +36,7 @@ public class JerarquiaService {
     @Transactional
     public JerarquiaResponseDTO createJerarquia (JerarquiaRequestDTO jerarquiaRequestDTO) {
         Jerarquia jerarquia = jerarquiaMapper.convertToEntity(jerarquiaRequestDTO);
+        jerarquia.setFFechaRegistro(LocalDateTime.now());
         jerarquiaRepository.save(jerarquia);
         return jerarquiaMapper.convertToDTO(jerarquia);
     }
@@ -43,7 +45,7 @@ public class JerarquiaService {
     public  JerarquiaResponseDTO updateJerarquia (Long jerarquiaPk, JerarquiaRequestDTO jerarquiaRequestDTO) {
         Jerarquia jerarquia = jerarquiaRepository.findById(jerarquiaPk)
                 .orElseThrow(()-> new RuntimeException("Jerarquia no encontrada"+ jerarquiaPk));
-        jerarquia.setXNombre(jerarquiaRequestDTO.getXNombre());
+        jerarquia.setXnombre(jerarquiaRequestDTO.getXnombre());
         jerarquia=jerarquiaRepository.save(jerarquia);
         return jerarquiaMapper.convertToDTO(jerarquia);
     }

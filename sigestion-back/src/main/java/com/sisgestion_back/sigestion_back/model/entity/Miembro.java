@@ -7,40 +7,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "miembro", schema = "schconfiguracion")
+@Table(name = "miembro")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Miembro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "miembro_pk", nullable = false)
+    @Column(name = "miembro_pk")
     private Long miembroPk;
 
-    @Column(name = "n_estado")
-    private String nEstado;
-
     @Column(name = "f_fecha_registro")
-    private Instant fFechaRegistro;
+    private LocalDateTime fFechaRegistro;
 
-    @Column(name = "f_fecha_modificacion")
-    private Instant fFechaModificacion;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinColumn(name = "comision_fk")
-    @JsonBackReference
     private Comision comisionfk;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_fk")
-    @JsonBackReference
     private Personal personalfk;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinColumn(name = "cargo_fk")
-    @JsonBackReference
     private Cargo cargofk;
 
 }

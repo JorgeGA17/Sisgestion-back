@@ -5,14 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
 public class PresidenteRequestDTO {
-
-    private String nEstado;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
+    //falta llenar datos para registro de presidente manualmente
+    private List<String> personalId;
+    private List<String> corteId;
+    private List<String> periodoId;
 }

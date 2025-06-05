@@ -42,10 +42,7 @@ public class ComisionService {
     public ComisionResponseDTO updateComision(Long comisionPk, ComisionRequestDTO comisionRequestDTO) {
         Comision comision = comisionRepository.findById(comisionPk)
                 .orElseThrow(()-> new RuntimeException("Comision no encontrada"+comisionPk));
-        comision.setXDescripcion(comisionRequestDTO.getXDescripcion());
-        comision.setNEstado(comisionRequestDTO.getNEstado());
-        comision.setFFechaRegistro(comisionRequestDTO.getFFechaRegistro());
-        comision.setFFechaModificacion(comisionRequestDTO.getFFechaModificacion());
+        comision.setXdescripcion(comisionRequestDTO.getXdescripcion());
         comision=comisionRepository.save(comision);
         return comisionMapper.convertToDTO(comision);
     }

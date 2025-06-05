@@ -20,6 +20,7 @@ public class ProyectoService {
 
     @Autowired
     private ProyectoRepository proyectoRepository;
+    @Autowired
     private ProyectoMapper proyectoMapper;
 
     @Transactional(readOnly = true)
@@ -46,18 +47,16 @@ public class ProyectoService {
     public  ProyectoResponseDTO updateProyecto(Long proyectopk, ProyectoRequestDTO proyectoRequestDTO) {
         Proyecto proyecto = proyectoRepository.findById(proyectopk)
                 .orElseThrow(()-> new RuntimeException("Proyecto no encontrado"+proyectopk));
-        proyecto.setXnombreproyecto(proyectoRequestDTO.getXnombreproyecto());
-        proyecto.setXslug(proyectoRequestDTO.getXslug());
+        proyecto.setXnombreProyecto(proyectoRequestDTO.getXnombreproyecto());
+
         proyecto.setXproblematica(proyectoRequestDTO.getXproblematica());
         proyecto.setXresumen(proyectoRequestDTO.getXresumen());
-        proyecto.setXobjetivogeneral(proyectoRequestDTO.getXobjetivogeneral());
+        proyecto.setXobjetivoGeneral(proyectoRequestDTO.getXobjetivogeneral());
         proyecto.setXinnovacion(proyectoRequestDTO.getXinnovacion());
         proyecto.setXimpacto(proyectoRequestDTO.getXimpacto());
         proyecto.setXsostenibilidad(proyectoRequestDTO.getXsostenibilidad());
         proyecto.setXreplicabilidad(proyectoRequestDTO.getXreplicabilidad());
-        proyecto.setNpublicacion(proyectoRequestDTO.getNpublicacion());
-        proyecto.setNpeso(proyectoRequestDTO.getNpeso());
-        proyecto.setFfecha(proyectoRequestDTO.getFfecha());
+
 
         proyecto=proyectoRepository.save(proyecto);
         return proyectoMapper.convertToDTO(proyecto);

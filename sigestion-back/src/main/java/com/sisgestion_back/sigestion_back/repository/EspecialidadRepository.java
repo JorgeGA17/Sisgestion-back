@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface EspecialidadRepository extends JpaRepository<Especialidad, Long> {
-    Optional<Especialidad> findByxNombre(String xNombre);
+
 }

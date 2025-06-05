@@ -11,10 +11,7 @@ import java.time.Instant;
 @NoArgsConstructor
 
 public class EtiquetaRequestDTO {
-    private String xNombre;
-    private String xSlug;
-    private String nEstado;
-    private String xCampo;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
+    private String xnombre;
+    private String xcampo;
+
 }

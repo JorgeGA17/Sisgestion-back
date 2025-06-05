@@ -7,29 +7,26 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 
-    @Data
+@Data
     @Entity
-    @Table(name = "especialidad", schema = "schconfiguracion")
+    @Table(name = "especialidad")
     @NoArgsConstructor
     @AllArgsConstructor
 
-    public class Especialidad implements Serializable {
+    public class Especialidad {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "especialidad_pk", nullable = false)
+        @Column(name = "especialidad_pk")
         private Long especialidadPk;
 
         @Column(name = "x_nombre")
-        private String xNombre;
+        private String xnombre;
 
         @Column(name = "f_fecha_registro")
-        private Instant fFechaRegistro;
-
-        @Column(name = "f_fecha_modificacion")
-        private Instant fFechaModificacion;
-
+        private LocalDateTime fFechaRegistro;
 
     }

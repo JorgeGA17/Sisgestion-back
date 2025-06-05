@@ -42,9 +42,6 @@ public class MiembroService {
     public MiembroResponseDTO updateMiembro(Long miembroPk, MiembroRequestDTO miembroRequestDTO) {
         Miembro miembro = miembroRepository.findById(miembroPk)
                 .orElseThrow(()-> new RuntimeException("Miembro no encontrado"+miembroPk));
-        miembro.setNEstado(miembroRequestDTO.getNEstado());
-        miembro.setFFechaModificacion(miembroRequestDTO.getFFechaModificacion());
-        miembro.setFFechaRegistro(miembroRequestDTO.getFFechaRegistro());
         miembro=miembroRepository.save(miembro);
         return miembroMapper.convertToDTO(miembro);
     }

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,6 +36,7 @@ public class CorteService {
     @Transactional
     public CorteResponseDTO createCorte (CorteRequestDTO corteRequestDTO) {
         Corte corte = corteMapper.convertToEntity(corteRequestDTO);
+        corte.setFFechaRegistro(LocalDateTime.now());
         corteRepository.save(corte);
         return corteMapper.convertToDTO(corte);
     }
@@ -43,11 +45,8 @@ public class CorteService {
     public  CorteResponseDTO updateCorte(Long cortePk, CorteRequestDTO corteRequestDTO) {
         Corte corte = corteRepository.findById(cortePk)
                 .orElseThrow(()-> new RuntimeException("Corte no encontrada"+cortePk));
-      corte.setCCodigo(corteRequestDTO.getCCodigo());
-      corte.setXNombre(corteRequestDTO.getXNombre());
-      corte.setXSlug(corteRequestDTO.getXSlug());
-      corte.setXNombreCorto(corteRequestDTO.getXNombreCorto());
-      corte.setNEstado(corteRequestDTO.getNEstado());
+      corte.setXnombre(corteRequestDTO.getXnombre());
+      corte.setXnombreCorto(corteRequestDTO.getXnombreCorto());
         corte=corteRepository.save(corte);
         return corteMapper.convertToDTO(corte);
     }

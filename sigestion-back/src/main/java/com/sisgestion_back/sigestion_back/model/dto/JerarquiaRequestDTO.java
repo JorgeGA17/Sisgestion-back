@@ -11,7 +11,5 @@ import java.time.Instant;
 @NoArgsConstructor
 
 public class JerarquiaRequestDTO {
-    private String xNombre;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
+    private String xnombre;
 }

@@ -7,38 +7,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "etiqueta", schema = "schconfiguracion")
+@Table(name = "etiqueta")
 @NoArgsConstructor
 @AllArgsConstructor
 
 public class Etiqueta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "etiqueta_pk", nullable = false)
+    @Column(name = "etiqueta_pk")
     private Long etiquetaPk;
 
     @Column(name ="x_nombre")
-    private String xNombre;
-
-    @Column(name ="x_lug")
-    private String xSlug;
-
-    @Column(name ="n_estado")
-    private String nEstado;
+    private String xnombre;
 
     @Column(name ="x_campo")
-    private String xCampo;
+    private String xcampo;
 
     @Column(name = "f_fecha_registro")
-    private Instant fFechaRegistro;
-
-    @Column(name = "f_fecha_modificacion")
-    private Instant fFechaModificacion;
-
+    private LocalDateTime fFechaRegistro;
 
 }

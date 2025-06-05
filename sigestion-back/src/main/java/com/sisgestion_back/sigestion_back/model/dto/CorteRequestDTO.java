@@ -14,19 +14,8 @@ import java.time.Instant;
 
 public class CorteRequestDTO {
 
-    private BigDecimal cCodigo;
-
-    private String xNombre;
-
-    private String xSlug;
-
-    private String xNombreCorto;
-
-    private String nEstado;
-
-    private Instant fFechaRegistro;
-
-    private Instant fFechaModificacion;
+    private String xnombre;
+    private String xnombreCorto;
 
 
 }

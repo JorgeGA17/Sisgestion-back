@@ -7,6 +7,8 @@ import com.sisgestion_back.sigestion_back.repository.EspecialidadRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -33,6 +35,7 @@ public class EspecialidadService {
     @Transactional
     public EspecialidadResponseDTO createEspecialidad (EspecialidadRequestDTO especialidadRequestDTO) {
         Especialidad especialidad = especialidadMapper.convertToEntity(especialidadRequestDTO);
+        especialidad.setFFechaRegistro(LocalDateTime.now());
         especialidadRepository.save(especialidad);
         return especialidadMapper.convertToDTO(especialidad);
     }
@@ -41,7 +44,7 @@ public class EspecialidadService {
     public  EspecialidadResponseDTO updateEspecialidad(Long especialidadPk, EspecialidadRequestDTO especialidadRequestDTO) {
         Especialidad especialidad = especialidadRepository.findById(especialidadPk)
                 .orElseThrow(()-> new RuntimeException("Especialidad no encontrada"+ especialidadPk));
-       especialidad.setXNombre(especialidadRequestDTO.getXNombre());
+       especialidad.setXnombre(especialidadRequestDTO.getXnombre());
         especialidad=especialidadRepository.save(especialidad);
         return especialidadMapper.convertToDTO(especialidad);
     }

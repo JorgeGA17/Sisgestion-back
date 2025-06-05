@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -14,7 +15,5 @@ public class JerarquiaResponseDTO {
 
     private Long jerarquiaPk;
     private String xNombre;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
-
+    private LocalDateTime fFechaRegistro;
 }

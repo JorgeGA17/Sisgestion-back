@@ -41,10 +41,8 @@ public class CargoService {
     public CargoResponseDTO updateCargo(Long cargoPk, CargoRequestDTO cargoRequestDTO) {
         Cargo cargo = cargoRepository.findById(cargoPk)
                 .orElseThrow(()-> new RuntimeException("Cargo no encontrado"+cargoPk));
-        cargo.setXNombre(cargoRequestDTO.getXNombre());
-        cargo.setFFechaRegistro(cargoRequestDTO.getFFechaRegistro());
-        cargo.setFFechaModificacion(cargoRequestDTO.getFFechaModificacion());
-        cargo=cargoRepository.save(cargo);
+        cargo.setXnombre(cargoRequestDTO.getXnombre());
+             cargo=cargoRepository.save(cargo);
         return cargoMapper.convertToDTO(cargo);
     }
 

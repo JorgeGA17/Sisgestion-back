@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface CargoRepository extends JpaRepository<Cargo,Long> {
-    Optional<Cargo> findByxNombre(String xNombre);
 
 }

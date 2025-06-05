@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -14,11 +15,7 @@ import java.util.List;
 
 public class EjeResponseDTO {
     private Long ejePk;
-    private String xNombre;
-    private String xSlug;
-    private String xResumen;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
-
-
+    private String xnombre;
+    private String xresumen;
+    private LocalDateTime fFechaRegistro;
 }

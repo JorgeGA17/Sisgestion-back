@@ -12,13 +12,7 @@ import java.time.Instant;
 
 public class EstadoRequestDTO {
 
-    private String xNombre;
+    private String xnombre;
+    private String xresumen;
 
-    private String xSlug;
-
-    private String xResumen;
-
-    private Instant fFechaRegistro;
-
-    private Instant fFechaModificacion;
 }

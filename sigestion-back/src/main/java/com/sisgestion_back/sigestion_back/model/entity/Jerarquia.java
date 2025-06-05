@@ -8,29 +8,27 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "jerarquia", schema = "schconfiguracion")
+@Table(name = "jerarquia")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Jerarquia implements Serializable  {
+public class Jerarquia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "jerarquia_pk", nullable = false)
+    @Column(name = "jerarquia_pk")
     private Long jerarquiaPk;
 
     @Column(name ="x_nombre")
-    private String xNombre;
+    private String xnombre;
 
     @Column(name = "f_fecha_registro")
-    private Instant fFechaRegistro;
-
-    @Column(name = "f_fecha_modificacion")
-    private Instant fFechaModificacion;
+    private LocalDateTime fFechaRegistro;
 
 
 }

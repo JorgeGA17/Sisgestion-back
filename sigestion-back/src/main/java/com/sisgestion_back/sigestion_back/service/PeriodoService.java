@@ -43,10 +43,7 @@ public class PeriodoService {
     public PeriodoResponseDTO updatePeriodo(Long periodoPk, PeriodoRequestDTO periodoRequestDTO) {
         Periodo periodo = periodoRepository.findById(periodoPk)
                 .orElseThrow(()-> new RuntimeException("Periodo no encontrado"+periodoPk));
-        periodo.setXNombre(periodoRequestDTO.getXNombre());
-        periodo.setNEstado(periodoRequestDTO.getNEstado());
-        periodo.setFFechaRegistro(periodoRequestDTO.getFFechaRegistro());
-        periodo.setFFechaModificacion(periodoRequestDTO.getFFechaModificacion());
+        periodo.setXnombre(periodoRequestDTO.getXnombre());
         periodo=periodoRepository.save(periodo);
         return periodoMapper.convertToDTO(periodo);
     }

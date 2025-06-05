@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -16,18 +17,8 @@ import java.util.List;
 public class CorteResponseDTO {
 
     private Long cortePk;
+    private String xnombre;
+    private String xnombreCorto;
+    private LocalDateTime fFechaRegistro;
 
-    private BigDecimal cCodigo;
-
-    private String xNombre;
-
-    private String xSlug;
-
-    private String xNombreCorto;
-
-    private String nEstado;
-
-    private Instant fFechaRegistro;
-
-    private Instant fFechaModificacion;
 }

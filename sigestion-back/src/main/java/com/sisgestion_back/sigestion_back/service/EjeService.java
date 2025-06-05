@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,6 +34,7 @@ public class EjeService {
         @Transactional
         public EjeResponseDTO createEje(EjeRequestDTO ejeRequestDTO) {
             Eje eje = ejeMapper.convertToEntity(ejeRequestDTO);
+            eje.setFFechaRegistro(LocalDateTime.now());
             ejeRepository.save(eje);
             return ejeMapper.convertToDTO(eje);
         }
@@ -41,7 +43,8 @@ public class EjeService {
         public EjeResponseDTO updateEje(Long ejePk, EjeRequestDTO ejeRequestDTO) {
             Eje eje = ejeRepository.findById(ejePk)
                     .orElseThrow(() -> new RuntimeException("Eje no encontrado" + ejePk));
-            eje.setXNombre(ejeRequestDTO.getXNombre());
+            eje.setXnombre(ejeRequestDTO.getXnombre());
+            eje.setXresumen(ejeRequestDTO.getXresumen());
             eje = ejeRepository.save(eje);
             return ejeMapper.convertToDTO(eje);
         }

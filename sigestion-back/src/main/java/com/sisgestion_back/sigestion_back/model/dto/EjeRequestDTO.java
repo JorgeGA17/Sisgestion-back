@@ -10,16 +10,6 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EjeRequestDTO {
-    private String xNombre;
-
-    private String xSlug;
-
-    private String xResumen;
-
-    private String nEstado;
-
-    private Instant fFechaRegistro;
-
-    private Instant fFechaModificacion;
-
+    private String xnombre;
+    private String xresumen;
 }

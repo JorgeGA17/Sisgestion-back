@@ -42,9 +42,7 @@ public class PresidenteService {
     public PresidenteResponseDTO updatePresidente(Long presidentePk, PresidenteRequestDTO presidenteRequestDTO) {
         Presidente presidente = presidenteRepository.findById(presidentePk)
                 .orElseThrow(()-> new RuntimeException("Presidente no encontrado"+presidentePk));
-        presidente.setNEstado(presidenteRequestDTO.getNEstado());
-        presidente.setFFechaModificacion(presidenteRequestDTO.getFFechaModificacion());
-        presidente.setFFechaRegistro(presidenteRequestDTO.getFFechaRegistro());
+
         presidente=presidenteRepository.save(presidente);
         return presidenteMapper.convertToDTO(presidente);
     }

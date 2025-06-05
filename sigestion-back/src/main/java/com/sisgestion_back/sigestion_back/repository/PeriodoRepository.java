@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface PeriodoRepository extends JpaRepository<Periodo,Long> {
-    Optional<Periodo> findByxNombre(String xNombre);
 
 }

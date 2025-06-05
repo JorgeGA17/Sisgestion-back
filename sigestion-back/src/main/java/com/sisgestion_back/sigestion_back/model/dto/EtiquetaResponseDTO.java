@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -13,11 +14,9 @@ import java.util.Set;
 public class EtiquetaResponseDTO {
 
     private Long etiquetaPk;
-    private String xNombre;
-    private String xSlug;
-    private String nEstado;
-    private String xCampo;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
+    private String xnombre;
+    private String xcampo;
+    private LocalDateTime fFechaRegistro;
+
 
 }

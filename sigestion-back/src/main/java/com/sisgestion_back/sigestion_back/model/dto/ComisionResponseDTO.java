@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -15,11 +16,9 @@ import java.time.Instant;
 public class ComisionResponseDTO {
 
     private Long comisionPk;
-    private String xDescripcion;
-    private String nEstado;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
-    private String xResolucion;
+    private String xdescripcion;
+    private LocalDateTime fFechaRegistro;
+    private String xresolucion;
     private Corte cortefk;
     private Periodo periodofk;
 }

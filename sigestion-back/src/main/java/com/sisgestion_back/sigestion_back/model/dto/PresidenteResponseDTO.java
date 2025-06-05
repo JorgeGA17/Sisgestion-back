@@ -8,15 +8,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PresidenteResponseDTO {
     private Long presidentePk;
-    private String nEstado;
-    private Instant fFechaRegistro;
-    private Instant fFechaModificacion;
+    private LocalDateTime fFechaRegistro;
     private Periodo periodofk;
     private Corte cortefk;
     private Personal personalfk;

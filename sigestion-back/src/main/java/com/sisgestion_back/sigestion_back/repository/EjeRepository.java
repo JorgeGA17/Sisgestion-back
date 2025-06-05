@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface EjeRepository extends JpaRepository<Eje, Long> {
-    Optional<Eje> findByxNombre(String xNombre);
+
 }

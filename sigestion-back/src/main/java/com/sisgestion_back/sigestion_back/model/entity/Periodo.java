@@ -7,40 +7,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "periodo", schema = "schconfiguracion")
+@Table(name = "periodo")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Periodo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "periodo_pk", nullable = false)
+    @Column(name = "periodo_pk")
     private Long periodoPk;
 
     @Column(name = "x_nombre")
-    private String xNombre;
-
-    @Column(name = "n_estado")
-    private String nEstado;
+    private String xnombre;
 
     @Column(name = "f_fecha_registro")
-    private Instant fFechaRegistro;
-
-    @Column(name = "f_fecha_modificacion")
-    private Instant fFechaModificacion;
+    private LocalDateTime fFechaRegistro;
 
     @OneToMany (mappedBy = "periodofk", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<Comision> comisiones;
 
     @OneToMany (mappedBy = "periodofk", cascade = CascadeType.ALL)
-    @JsonBackReference
     private List<Presidente> presidentes;
-
 
 }
 

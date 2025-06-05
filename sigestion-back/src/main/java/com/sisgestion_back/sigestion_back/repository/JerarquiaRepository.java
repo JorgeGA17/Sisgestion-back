@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface JerarquiaRepository extends JpaRepository<Jerarquia, Long> {
-    Optional<Jerarquia> findByxNombre(String xNombre);
+
 }

@@ -6,31 +6,23 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Formula;
-
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
-
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
-@Table(name = "proyecto", schema = "schconfiguracion")
+@Table(name = "proyecto")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Proyecto{
+public class Proyecto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "proyecto_pk", nullable = false)
-    private Long proyectopk;
+    @Column(name = "proyecto_pk")
+    private Long proyectoPk;
 
     @Column(name = "x_nombre_proyecto")
-    private String xnombreproyecto;
-
-    @Column(name = "x_slug")
-    private String xslug;
+    private String xnombreProyecto;
 
     @Column(name = "x_problematica")
     private String xproblematica;
@@ -39,7 +31,7 @@ public class Proyecto{
     private String xresumen;
 
     @Column(name = "x_objetivo_general")
-    private String xobjetivogeneral;
+    private String xobjetivoGeneral;
 
     @Column(name = "x_innovacion")
     private Integer xinnovacion;
@@ -56,11 +48,14 @@ public class Proyecto{
     @Column(name = "n_peso")
     private Integer npeso;
 
-    @Column(name = "n_publicacion")
-    private String npublicacion;
+    @Column(name = "f_fecha_registro")
+    private LocalDateTime fFechaRegistro;
 
-    @Column(name = "f_fecha")
-    private String ffecha;
+    @Column(name = "x_concepto_eval")
+    private String xconcepto_eval;
+
+    @Column(name = "x_descrip_eval")
+    private String xdescrip_eval;
 
     @ManyToOne
     @JoinColumn(name = "corte_fk")
@@ -72,55 +67,46 @@ public class Proyecto{
     @JsonBackReference
     private Estado estadofk;
 
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    @JsonBackReference
+
+   @ManyToMany(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinTable(
-            name = "especialidad_proyectos", schema = "schconfiguracion",
+            name = "especialidad_proyectos",
             joinColumns = @JoinColumn(name = "proyecto_fk"),
             inverseJoinColumns = @JoinColumn(name = "especialidad_fk")
     )
-    private Set<Especialidad> especialidades = new HashSet<>();
+    private List<Especialidad> especialidades;
 
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    @JsonBackReference
+    @ManyToMany(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinTable(
-            name = "jerarquia_proyectos", schema = "schconfiguracion",
+            name = "jerarquia_proyectos",
             joinColumns = @JoinColumn(name = "proyecto_fk"),
             inverseJoinColumns = @JoinColumn(name = "jerarquia_fk")
     )
-    private Set<Jerarquia> jerarquias = new HashSet<>();
+    private List<Jerarquia> jerarquias;
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    @JsonBackReference
+    @ManyToMany(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinTable(
-            name = "eje_proyectos", schema = "schconfiguracion",
+            name = "eje_proyectos",
             joinColumns = @JoinColumn(name = "proyecto_fk"),
             inverseJoinColumns = @JoinColumn(name = "eje_fk")
     )
-    private Set<Eje> ejes = new HashSet<>();
+    private List<Eje> ejes;
 
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    @JsonBackReference
+    @ManyToMany(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinTable(
-            name = "etiqueta_proyectos", schema = "schconfiguracion",
+            name = "etiqueta_proyectos",
             joinColumns = @JoinColumn(name = "proyecto_fk"),
             inverseJoinColumns = @JoinColumn(name = "etiqueta_fk")
     )
-    private Set<Etiqueta> etiquetas = new HashSet<>();
+    private List<Etiqueta> etiquetas;
 
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    @JsonBackReference
+    @ManyToMany(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinTable(
-            name = "personal_proyectos", schema = "schconfiguracion",
+            name = "personal_proyectos",
             joinColumns = @JoinColumn(name = "proyecto_fk"),
             inverseJoinColumns = @JoinColumn(name = "personal_fk")
     )
-    private Set<Personal> personas = new HashSet<>();
-
-
-
-
-
+    private List<Personal> personal;
 }
 

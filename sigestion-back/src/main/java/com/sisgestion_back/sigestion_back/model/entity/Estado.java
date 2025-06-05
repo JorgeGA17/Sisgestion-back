@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "estado_proyectos", schema = "schconfiguracion")
+@Table(name = "estado_proyectos")
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -21,23 +22,17 @@ public class Estado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "estado_proyecto_pk", nullable = false)
+    @Column(name = "estado_proyecto_pk")
     private Long estadoPk;
 
     @Column(name = "x_nombre")
-    private String xNombre;
-
-    @Column(name = "x_slug")
-    private String xSlug;
+    private String xnombre;
 
     @Column(name ="x_resumen")
-    private String xResumen;
+    private String xresumen;
 
     @Column(name = "f_fecha_registro")
-    private Instant fFechaRegistro;
-
-    @Column(name = "f_fecha_modificacion")
-    private Instant fFechaModificacion;
+    private LocalDateTime fFechaRegistro;
 
     @OneToMany(mappedBy = "estadofk", cascade = CascadeType.ALL)
     @JsonBackReference
