@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -34,6 +35,7 @@ public class EstadoService {
     @Transactional
     public EstadoResponseDTO createEstado (EstadoRequestDTO estadoRequestDTO) {
         Estado estado = estadoMapper.convertToEntity(estadoRequestDTO);
+        estado.setFFechaRegistro(LocalDateTime.now());
         estadoRepository.save(estado);
         return estadoMapper.convertToDTO(estado);
     }

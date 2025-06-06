@@ -21,16 +21,16 @@ public class Proyecto {
     @Column(name = "proyecto_pk")
     private Long proyectoPk;
 
-    @Column(name = "x_nombre_proyecto")
+    @Column(name = "x_nombre_proyecto",length = 500)
     private String xnombreProyecto;
 
-    @Column(name = "x_problematica")
+    @Column(name = "x_problematica", columnDefinition = "TEXT")
     private String xproblematica;
 
-    @Column(name = "x_resumen")
+    @Column(name = "x_resumen", columnDefinition = "TEXT")
     private String xresumen;
 
-    @Column(name = "x_objetivo_general")
+    @Column(name = "x_objetivo_general", columnDefinition = "TEXT")
     private String xobjetivoGeneral;
 
     @Column(name = "x_innovacion")
@@ -51,11 +51,11 @@ public class Proyecto {
     @Column(name = "f_fecha_registro")
     private LocalDateTime fFechaRegistro;
 
-    @Column(name = "x_concepto_eval")
-    private String xconcepto_eval;
+    @Column(name = "x_concepto_eval", columnDefinition = "TEXT")
+    private String xconceptoEval;
 
-    @Column(name = "x_descrip_eval")
-    private String xdescrip_eval;
+    @Column(name = "x_descrip_eval", columnDefinition = "TEXT")
+    private String xdescripEval;
 
     @ManyToOne
     @JoinColumn(name = "corte_fk")
