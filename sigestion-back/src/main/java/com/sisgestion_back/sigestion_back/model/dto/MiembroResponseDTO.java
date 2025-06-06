@@ -1,14 +1,11 @@
 package com.sisgestion_back.sigestion_back.model.dto;
 
-import com.sisgestion_back.sigestion_back.model.entity.Cargo;
-import com.sisgestion_back.sigestion_back.model.entity.Comision;
-import com.sisgestion_back.sigestion_back.model.entity.Personal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,9 +13,18 @@ import java.time.LocalDateTime;
 public class MiembroResponseDTO {
     private Long miembroPk;
     private LocalDateTime fFechaRegistro;
-    private Comision comisionfk;
-    private Personal personalfk;
-    private Cargo cargofk;
+
+    // Campos para relaciones ManyToOne
+    private Long comisionId;
+    private String comisionNombreCorte;
+
+    // IDs de las colecciones ManyToMany
+    private List<Long> personalIds;
+    private List<Long> cargoIds;
+
+    // Nombres/Descripciones de las colecciones ManyToMany
+    private List<String> listaNombresPersonas;
+    private List<String> listaNombresCargos;
 
 
 }
