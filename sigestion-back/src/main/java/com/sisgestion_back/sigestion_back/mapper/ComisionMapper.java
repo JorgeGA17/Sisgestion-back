@@ -2,6 +2,7 @@ package com.sisgestion_back.sigestion_back.mapper;
 
 import com.sisgestion_back.sigestion_back.model.dto.ComisionRequestDTO;
 import com.sisgestion_back.sigestion_back.model.dto.ComisionResponseDTO;
+import com.sisgestion_back.sigestion_back.model.dto.ProyectoResponseDTO;
 import com.sisgestion_back.sigestion_back.model.entity.Comision;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -20,7 +21,27 @@ public class ComisionMapper {
     }
 
     public ComisionResponseDTO convertToDTO(Comision comision) {
-        return modelMapper.map(comision, ComisionResponseDTO.class);
+      ComisionResponseDTO comisionResponseDTO = modelMapper.map(comision, ComisionResponseDTO.class);
+
+        // Mapeo para relaciones ManyToOne (Corte y Estado)
+        if (comision.getCortefk() != null) {
+            comisionResponseDTO.setCorteId(comision.getCortefk().getCortePk());
+            comisionResponseDTO.setNombreCorte(comision.getCortefk().getXnombre());
+        } else {
+            comisionResponseDTO.setCorteId(null);
+            comisionResponseDTO.setNombreCorte(null);
+        }
+
+        // Mapeo para relaciones ManyToOne (Corte y Estado)
+        if (comision.getPeriodofk() != null) {
+            comisionResponseDTO.setPeriodoId(comision.getPeriodofk().getPeriodoPk());
+            comisionResponseDTO.setNombrePeriodo(comision.getPeriodofk().getXnombre());
+        } else {
+            comisionResponseDTO.setPeriodoId(null);
+            comisionResponseDTO.setNombrePeriodo(null);
+        }
+
+        return comisionResponseDTO;
     }
 
     public List<ComisionResponseDTO> convertToDTO(List<Comision> comisiones) {

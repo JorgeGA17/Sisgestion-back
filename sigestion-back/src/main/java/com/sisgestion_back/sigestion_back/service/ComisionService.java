@@ -4,11 +4,18 @@ import com.sisgestion_back.sigestion_back.mapper.ComisionMapper;
 import com.sisgestion_back.sigestion_back.model.dto.ComisionRequestDTO;
 import com.sisgestion_back.sigestion_back.model.dto.ComisionResponseDTO;
 import com.sisgestion_back.sigestion_back.model.entity.Comision;
+import com.sisgestion_back.sigestion_back.model.entity.Corte;
+import com.sisgestion_back.sigestion_back.model.entity.Estado;
+import com.sisgestion_back.sigestion_back.model.entity.Periodo;
 import com.sisgestion_back.sigestion_back.repository.ComisionRepository;
+import com.sisgestion_back.sigestion_back.repository.CorteRepository;
+import com.sisgestion_back.sigestion_back.repository.EstadoRepository;
+import com.sisgestion_back.sigestion_back.repository.PeriodoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,6 +24,8 @@ public class ComisionService {
 
     private ComisionRepository comisionRepository;
     private ComisionMapper comisionMapper;
+    private final CorteRepository corteRepository;
+    private final PeriodoRepository periodoRepository;
 
     @Transactional(readOnly = true)
     public List<ComisionResponseDTO> getAllComisiones() {
@@ -34,6 +43,16 @@ public class ComisionService {
     @Transactional
     public ComisionResponseDTO createComision (ComisionRequestDTO comisionRequestDTO) {
         Comision comision = comisionMapper.convertToEntity(comisionRequestDTO);
+        comision.setFFechaRegistro(LocalDateTime.now());
+
+        //Obtener y asignar entidades ManyToOne (Corte y Periodo)
+        Corte corte = corteRepository.findById(comisionRequestDTO.getCorteId())
+                .orElseThrow(() -> new RuntimeException("Corte no encontrado con ID: " + comisionRequestDTO.getCorteId()));
+        Periodo periodo = periodoRepository.findById(comisionRequestDTO.getPeriodoId())
+                .orElseThrow(() -> new RuntimeException("Estado no encontrado con ID: " + comisionRequestDTO.getPeriodoId()));
+        comision.setCortefk(corte);
+        comision.setPeriodofk(periodo);
+
         comisionRepository.save(comision);
         return comisionMapper.convertToDTO(comision);
     }
@@ -43,6 +62,14 @@ public class ComisionService {
         Comision comision = comisionRepository.findById(comisionPk)
                 .orElseThrow(()-> new RuntimeException("Comision no encontrada"+comisionPk));
         comision.setXdescripcion(comisionRequestDTO.getXdescripcion());
+        //Obtener y asignar entidades ManyToOne (Corte y Periodo)
+        Corte corte = corteRepository.findById(comisionRequestDTO.getCorteId())
+                .orElseThrow(() -> new RuntimeException("Corte no encontrado con ID: " + comisionRequestDTO.getCorteId()));
+        Periodo periodo = periodoRepository.findById(comisionRequestDTO.getPeriodoId())
+                .orElseThrow(() -> new RuntimeException("Estado no encontrado con ID: " + comisionRequestDTO.getPeriodoId()));
+        comision.setCortefk(corte);
+        comision.setPeriodofk(periodo);
+
         comision=comisionRepository.save(comision);
         return comisionMapper.convertToDTO(comision);
     }

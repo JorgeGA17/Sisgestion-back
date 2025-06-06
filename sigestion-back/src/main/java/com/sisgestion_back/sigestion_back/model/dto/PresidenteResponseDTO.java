@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PresidenteResponseDTO {
+
     private Long presidentePk;
     private LocalDateTime fFechaRegistro;
     private Periodo periodofk;

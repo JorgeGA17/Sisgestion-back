@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,6 +36,7 @@ public class PeriodoService {
     @Transactional
     public PeriodoResponseDTO createPeriodo (PeriodoRequestDTO periodoRequestDTO) {
         Periodo periodo = periodoMapper.convertToEntity(periodoRequestDTO);
+        periodo.setFFechaRegistro(LocalDateTime.now());
         periodoRepository.save(periodo);
         return periodoMapper.convertToDTO(periodo);
     }

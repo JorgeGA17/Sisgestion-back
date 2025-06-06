@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -34,6 +35,7 @@ public class MiembroService {
     @Transactional
     public MiembroResponseDTO createMiembro (MiembroRequestDTO miembroRequestDTO) {
         Miembro miembro = miembroMapper.convertToEntity(miembroRequestDTO);
+        miembro.setFFechaRegistro(LocalDateTime.now());
         miembroRepository.save(miembro);
         return miembroMapper.convertToDTO(miembro);
     }
