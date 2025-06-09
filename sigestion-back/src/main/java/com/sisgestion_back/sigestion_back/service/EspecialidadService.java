@@ -28,7 +28,7 @@ public class EspecialidadService {
     @Transactional(readOnly = true)
     public EspecialidadResponseDTO getEspecialidadById(Long especialidadPk) {
         Especialidad especialidad = especialidadRepository.findById(especialidadPk)
-                .orElseThrow(()-> new RuntimeException("Especialidad no encontrada"+especialidadPk));
+                .orElseThrow(()-> new RuntimeException("Especialidad no encontrada: "+especialidadPk));
         return especialidadMapper.convertToDTO(especialidad);
     }
 
@@ -43,7 +43,7 @@ public class EspecialidadService {
     @Transactional
     public  EspecialidadResponseDTO updateEspecialidad(Long especialidadPk, EspecialidadRequestDTO especialidadRequestDTO) {
         Especialidad especialidad = especialidadRepository.findById(especialidadPk)
-                .orElseThrow(()-> new RuntimeException("Especialidad no encontrada"+ especialidadPk));
+                .orElseThrow(()-> new RuntimeException("Especialidad no encontrada: "+ especialidadPk));
        especialidad.setXnombre(especialidadRequestDTO.getXnombre());
         especialidad=especialidadRepository.save(especialidad);
         return especialidadMapper.convertToDTO(especialidad);

@@ -1,9 +1,6 @@
 package com.sisgestion_back.sigestion_back.mapper;
 
-import com.sisgestion_back.sigestion_back.model.dto.ComisionRequestDTO;
-import com.sisgestion_back.sigestion_back.model.dto.ComisionResponseDTO;
-import com.sisgestion_back.sigestion_back.model.dto.PresidenteRequestDTO;
-import com.sisgestion_back.sigestion_back.model.dto.PresidenteResponseDTO;
+import com.sisgestion_back.sigestion_back.model.dto.*;
 import com.sisgestion_back.sigestion_back.model.entity.Comision;
 import com.sisgestion_back.sigestion_back.model.entity.Presidente;
 import lombok.AllArgsConstructor;
@@ -22,7 +19,34 @@ public class PresidenteMapper {
     }
 
     public PresidenteResponseDTO convertToDTO(Presidente presidente) {
-        return modelMapper.map(presidente, PresidenteResponseDTO.class);
+        PresidenteResponseDTO presidenteResponseDTO = modelMapper.map(presidente, PresidenteResponseDTO.class);
+
+        if (presidente.getPeriodofk() != null) {
+            presidenteResponseDTO.setPeriodoId(presidente.getPeriodofk().getPeriodoPk());
+            presidenteResponseDTO.setPeriodoNombre(presidente.getPeriodofk().getXnombre());
+        } else {
+            presidenteResponseDTO.setPeriodoId(null);
+            presidenteResponseDTO.setPeriodoNombre(null);
+        }
+
+        if (presidente.getCortefk() != null) {
+            presidenteResponseDTO.setCorteId(presidente.getCortefk().getCortePk());
+            presidenteResponseDTO.setCorteNombre(presidente.getCortefk().getXnombreCorto());
+        } else {
+            presidenteResponseDTO.setCorteId(null);
+            presidenteResponseDTO.setCorteNombre(null);
+        }
+
+        if (presidente.getPersonalfk() != null) {
+           presidenteResponseDTO.setPersonalId(presidente.getPersonalfk().getPersonalPk());
+            presidenteResponseDTO.setPersonalNombre(presidente.getPersonalfk().getXnombreCompleto());
+        } else {
+            presidenteResponseDTO.setPersonalId(null);
+            presidenteResponseDTO.setPersonalNombre(null);
+        }
+
+        return presidenteResponseDTO;
+
     }
 
     public List<PresidenteResponseDTO> convertToDTO(List<Presidente> presidentes) {

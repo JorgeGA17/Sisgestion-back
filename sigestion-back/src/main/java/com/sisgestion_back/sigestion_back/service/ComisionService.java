@@ -49,7 +49,7 @@ public class ComisionService {
         Corte corte = corteRepository.findById(comisionRequestDTO.getCorteId())
                 .orElseThrow(() -> new RuntimeException("Corte no encontrado con ID: " + comisionRequestDTO.getCorteId()));
         Periodo periodo = periodoRepository.findById(comisionRequestDTO.getPeriodoId())
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado con ID: " + comisionRequestDTO.getPeriodoId()));
+                .orElseThrow(() -> new RuntimeException("Periodo no encontrado con ID: " + comisionRequestDTO.getPeriodoId()));
         comision.setCortefk(corte);
         comision.setPeriodofk(periodo);
 
@@ -66,7 +66,7 @@ public class ComisionService {
         Corte corte = corteRepository.findById(comisionRequestDTO.getCorteId())
                 .orElseThrow(() -> new RuntimeException("Corte no encontrado con ID: " + comisionRequestDTO.getCorteId()));
         Periodo periodo = periodoRepository.findById(comisionRequestDTO.getPeriodoId())
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado con ID: " + comisionRequestDTO.getPeriodoId()));
+                .orElseThrow(() -> new RuntimeException("Periodo no encontrado con ID: " + comisionRequestDTO.getPeriodoId()));
         comision.setCortefk(corte);
         comision.setPeriodofk(periodo);
 

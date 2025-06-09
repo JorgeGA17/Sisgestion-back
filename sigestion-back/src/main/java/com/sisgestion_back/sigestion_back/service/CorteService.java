@@ -29,7 +29,7 @@ public class CorteService {
     @Transactional(readOnly = true)
     public CorteResponseDTO getCorteById(Long cortePk) {
         Corte corte = corteRepository.findById(cortePk)
-                .orElseThrow(()-> new RuntimeException("Corte no encontrada"+cortePk));
+                .orElseThrow(()-> new RuntimeException("Corte no encontrada: "+cortePk));
         return corteMapper.convertToDTO(corte);
     }
 
@@ -44,7 +44,7 @@ public class CorteService {
     @Transactional
     public  CorteResponseDTO updateCorte(Long cortePk, CorteRequestDTO corteRequestDTO) {
         Corte corte = corteRepository.findById(cortePk)
-                .orElseThrow(()-> new RuntimeException("Corte no encontrada"+cortePk));
+                .orElseThrow(()-> new RuntimeException("Corte no encontrada: "+cortePk));
       corte.setXnombre(corteRequestDTO.getXnombre());
       corte.setXnombreCorto(corteRequestDTO.getXnombreCorto());
         corte=corteRepository.save(corte);

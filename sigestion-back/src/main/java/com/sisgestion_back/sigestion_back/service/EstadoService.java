@@ -28,7 +28,7 @@ public class EstadoService {
     @Transactional(readOnly = true)
     public EstadoResponseDTO getEstadoById(Long estadoPk) {
         Estado estado = estadoRepository.findById(estadoPk)
-                .orElseThrow(()-> new RuntimeException("Estado no encontrado"+estadoPk));
+                .orElseThrow(()-> new RuntimeException("Estado no encontrado: "+estadoPk));
         return estadoMapper.convertToDTO(estado);
     }
 
@@ -43,7 +43,7 @@ public class EstadoService {
     @Transactional
     public  EstadoResponseDTO updateEstado (Long estadoPk, EstadoRequestDTO estadoRequestDTO) {
         Estado estado = estadoRepository.findById(estadoPk)
-                .orElseThrow(()-> new RuntimeException("Estado no encontrada"+estadoPk));
+                .orElseThrow(()-> new RuntimeException("Estado no encontrada: "+estadoPk));
         estado.setXnombre(estadoRequestDTO.getXnombre());
         estado.setXresumen(estadoRequestDTO.getXresumen());
         estado=estadoRepository.save(estado);

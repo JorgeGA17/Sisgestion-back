@@ -27,7 +27,7 @@ public class CargoService {
     @Transactional(readOnly = true)
     public CargoResponseDTO getCargoById(Long cargoPk) {
         Cargo cargo = cargoRepository.findById(cargoPk)
-                .orElseThrow(()-> new RuntimeException("Cargo no encontrado"+cargoPk));
+                .orElseThrow(()-> new RuntimeException("Cargo no encontrado: "+cargoPk));
         return cargoMapper.convertToDTO(cargo);
     }
 
@@ -42,7 +42,7 @@ public class CargoService {
     @Transactional
     public CargoResponseDTO updateCargo(Long cargoPk, CargoRequestDTO cargoRequestDTO) {
         Cargo cargo = cargoRepository.findById(cargoPk)
-                .orElseThrow(()-> new RuntimeException("Cargo no encontrado"+cargoPk));
+                .orElseThrow(()-> new RuntimeException("Cargo no encontrado: "+cargoPk));
         cargo.setXnombre(cargoRequestDTO.getXnombre());
              cargo=cargoRepository.save(cargo);
         return cargoMapper.convertToDTO(cargo);

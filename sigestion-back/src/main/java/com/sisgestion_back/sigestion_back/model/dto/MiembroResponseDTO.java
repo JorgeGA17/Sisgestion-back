@@ -18,13 +18,11 @@ public class MiembroResponseDTO {
     private Long comisionId;
     private String comisionNombreCorte;
 
-    // IDs de las colecciones ManyToMany
-    private List<Long> personalIds;
-    private List<Long> cargoIds;
+    private Long personalId;
+    private String personalNombre;
 
-    // Nombres/Descripciones de las colecciones ManyToMany
-    private List<String> listaNombresPersonas;
-    private List<String> listaNombresCargos;
+    private Long cargoId;
+    private String cargoNombre;
 
 
 }

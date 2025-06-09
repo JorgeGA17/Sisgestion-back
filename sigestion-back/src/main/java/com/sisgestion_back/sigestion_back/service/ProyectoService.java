@@ -94,7 +94,7 @@ public class ProyectoService {
     public ProyectoResponseDTO updateProyecto(Long proyectopk, ProyectoRequestDTO proyectoRequestDTO) {
         // 1. Encontrar el proyecto existente
         Proyecto proyecto = proyectoRepository.findById(proyectopk)
-                .orElseThrow(()-> new RuntimeException("Proyecto no encontrado: " + proyectopk));
+                .orElseThrow(()-> new RuntimeException("Proyecto no encontrado: " + " " +proyectopk));
 
         // 2. Actualizar campos directos del DTO (ModelMapper podría ayudar aquí, pero manual es explícito)
         proyecto.setXnombreProyecto(proyectoRequestDTO.getXnombreProyecto());

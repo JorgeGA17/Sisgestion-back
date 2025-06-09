@@ -17,11 +17,13 @@ public class MiembroRequestDTO {
 
     @NotNull(message = "ID de la comision es requerido")
     @Positive(message = "El ID de la comision debe ser un número positivo")
-    private Long ComisionId;
+    private Long comisionId;
 
-    @NotEmpty(message = "La lista de personal es requerida")
-    private List<Long> personalId;
+    @NotNull(message = "ID del personal es requerido")
+    @Positive(message = "El ID del personal debe ser un número positivo")
+    private Long personalId;
 
-    @NotEmpty(message = "La lista de cargo es requerida")
-    private List<Long> cargoId;
+    @NotNull(message = "ID del cargo es requerido")
+    @Positive(message = "El ID del cargo debe ser un número positivo")
+    private Long cargoId;
 }

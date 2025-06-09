@@ -29,7 +29,7 @@ public class JerarquiaService {
     @Transactional(readOnly = true)
     public JerarquiaResponseDTO getJerarquiaById(Long jerarquiaPk) {
         Jerarquia jerarquia = jerarquiaRepository.findById(jerarquiaPk)
-                .orElseThrow(()-> new RuntimeException("Jerarquia no encontrada"+jerarquiaPk));
+                .orElseThrow(()-> new RuntimeException("Jerarquia no encontrada: "+jerarquiaPk));
         return jerarquiaMapper.convertToDTO(jerarquia);
     }
 
@@ -44,7 +44,7 @@ public class JerarquiaService {
     @Transactional
     public  JerarquiaResponseDTO updateJerarquia (Long jerarquiaPk, JerarquiaRequestDTO jerarquiaRequestDTO) {
         Jerarquia jerarquia = jerarquiaRepository.findById(jerarquiaPk)
-                .orElseThrow(()-> new RuntimeException("Jerarquia no encontrada"+ jerarquiaPk));
+                .orElseThrow(()-> new RuntimeException("Jerarquia no encontrada: "+ jerarquiaPk));
         jerarquia.setXnombre(jerarquiaRequestDTO.getXnombre());
         jerarquia=jerarquiaRepository.save(jerarquia);
         return jerarquiaMapper.convertToDTO(jerarquia);

@@ -22,22 +22,6 @@ public class MiembroMapper {
 
     private final ModelMapper modelMapper;
 
-    private List<String> mapPersonalToFullNames(List<Personal> personal) {
-        return Optional.ofNullable(personal)
-                .orElse(Collections.emptyList())
-                .stream()
-                .map(Personal::getXnombreCompleto)
-                .collect(Collectors.toList());
-    }
-
-    private List<String> mapCargoToFullNames(List<Cargo> cargos) {
-        return Optional.ofNullable(cargos)
-                .orElse(Collections.emptyList())
-                .stream()
-                .map(Cargo::getXnombre)
-                .collect(Collectors.toList());
-    }
-
     public Miembro convertToEntity(MiembroRequestDTO miembroRequestDTO) {
         return modelMapper.map(miembroRequestDTO, Miembro.class);
     }
@@ -54,16 +38,21 @@ public class MiembroMapper {
             miembroResponseDTO.setComisionNombreCorte(null);
         }
 
+        if (miembro.getPersonalfk() != null) {
+            miembroResponseDTO.setPersonalId(miembro.getPersonalfk().getPersonalPk());
+            miembroResponseDTO.setPersonalNombre(miembro.getPersonalfk().getXnombreCompleto());
+        } else {
+            miembroResponseDTO.setPersonalId(null);
+            miembroResponseDTO.setPersonalNombre(null);
+        }
 
-      /*  miembroResponseDTO.setPersonalIds(
-                Optional.ofNullable(miembro.getPersonalfk())
-                        .orElse((Personal) Collections.emptyList())
-                        .map(Personal::getPersonalPk)
-                        .collect(Collectors.toList())
-        );
-
-        es por porque es manytone y lo vas a necesitar es many to many chequear
-*/
+        if (miembro.getCargofk() != null) {
+            miembroResponseDTO.setCargoId(miembro.getCargofk().getCargoPk());
+            miembroResponseDTO.setCargoNombre(miembro.getCargofk().getXnombre());
+        } else {
+            miembroResponseDTO.setCargoId(null);
+            miembroResponseDTO.setCargoNombre(null);
+        }
 
         return miembroResponseDTO;
 

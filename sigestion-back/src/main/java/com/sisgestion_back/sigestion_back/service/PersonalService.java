@@ -28,7 +28,7 @@ public class PersonalService {
     @Transactional(readOnly = true)
     public PersonalResponseDTO getPersonalById(Long personalPk) {
         Personal personal = personalRepository.findById(personalPk)
-                .orElseThrow(() -> new RuntimeException("Personal no encontrado" + personalPk));
+                .orElseThrow(() -> new RuntimeException("Personal no encontrado: " + personalPk));
         return personalMapper.convertToDTO(personal);
     }
 
@@ -44,7 +44,7 @@ public class PersonalService {
     @Transactional
     public PersonalResponseDTO updatePersonal(Long personalPk, PersonalRequestDTO personalRequestDTO) {
         Personal personal = personalRepository.findById(personalPk)
-                .orElseThrow(() -> new RuntimeException("Personal no encontrado" + personalPk));
+                .orElseThrow(() -> new RuntimeException("Personal no encontrado: " + personalPk));
 
         personal.setXnombre(personalRequestDTO.getXnombre());
         personal.setXapellido(personalRequestDTO.getXapellido());

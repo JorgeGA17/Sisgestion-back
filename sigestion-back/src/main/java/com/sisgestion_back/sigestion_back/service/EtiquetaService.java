@@ -28,7 +28,7 @@ public class EtiquetaService {
     @Transactional(readOnly = true)
     public EtiquetaResponseDTO getEtiquetaById(Long etiquetaPk) {
         Etiqueta etiqueta = etiquetaRepository.findById(etiquetaPk)
-                .orElseThrow(() -> new RuntimeException("Etiqueta no encontrada" + etiquetaPk));
+                .orElseThrow(() -> new RuntimeException("Etiqueta no encontrada: " + etiquetaPk));
         return etiquetaMapper.convertToDTO(etiqueta);
     }
 
@@ -43,7 +43,7 @@ public class EtiquetaService {
     @Transactional
     public EtiquetaResponseDTO updateEtiqueta(Long etiquetaPk, EtiquetaRequestDTO etiquetaRequestDTO) {
         Etiqueta etiqueta = etiquetaRepository.findById(etiquetaPk)
-                .orElseThrow(() -> new RuntimeException("Etiqueta no encontrada" + etiquetaPk));
+                .orElseThrow(() -> new RuntimeException("Etiqueta no encontrada: " + etiquetaPk));
         etiqueta.setXnombre(etiquetaRequestDTO.getXnombre());
         etiqueta = etiquetaRepository.save(etiqueta);
         return etiquetaMapper.convertToDTO(etiqueta);

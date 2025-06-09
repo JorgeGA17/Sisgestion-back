@@ -27,7 +27,7 @@ public class EjeService {
         @Transactional(readOnly = true)
         public EjeResponseDTO getEjeById(Long ejePk) {
             Eje eje = ejeRepository.findById(ejePk)
-                    .orElseThrow(() -> new RuntimeException("Eje no encontrado" + ejePk));
+                    .orElseThrow(() -> new RuntimeException("Eje no encontrado: " + ejePk));
             return ejeMapper.convertToDTO(eje);
         }
 
@@ -42,7 +42,7 @@ public class EjeService {
         @Transactional
         public EjeResponseDTO updateEje(Long ejePk, EjeRequestDTO ejeRequestDTO) {
             Eje eje = ejeRepository.findById(ejePk)
-                    .orElseThrow(() -> new RuntimeException("Eje no encontrado" + ejePk));
+                    .orElseThrow(() -> new RuntimeException("Eje no encontrado: " + ejePk));
             eje.setXnombre(ejeRequestDTO.getXnombre());
             eje.setXresumen(ejeRequestDTO.getXresumen());
             eje = ejeRepository.save(eje);

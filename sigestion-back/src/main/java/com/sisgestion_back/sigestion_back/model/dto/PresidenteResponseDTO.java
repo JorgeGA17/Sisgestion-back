@@ -17,8 +17,17 @@ public class PresidenteResponseDTO {
 
     private Long presidentePk;
     private LocalDateTime fFechaRegistro;
-    private Periodo periodofk;
-    private Corte cortefk;
-    private Personal personalfk;
+
+    // Campos para relaciones ManyToOne
+    private Long periodoId;
+    private String periodoNombre;
+
+    private Long corteId;
+    private String corteNombre;
+
+    private Long personalId;
+    private String personalNombre;
+
+
 
 }

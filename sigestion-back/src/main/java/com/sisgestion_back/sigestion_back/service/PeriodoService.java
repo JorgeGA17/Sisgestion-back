@@ -29,7 +29,7 @@ public class PeriodoService {
     @Transactional(readOnly = true)
     public PeriodoResponseDTO getPeriodoById(Long periodoPk) {
         Periodo periodo = periodoRepository.findById(periodoPk)
-                .orElseThrow(()-> new RuntimeException("Periodo no encontrado"+periodoPk));
+                .orElseThrow(()-> new RuntimeException("Periodo no encontrado: "+periodoPk));
         return periodoMapper.convertToDTO(periodo);
     }
 
@@ -44,7 +44,7 @@ public class PeriodoService {
     @Transactional
     public PeriodoResponseDTO updatePeriodo(Long periodoPk, PeriodoRequestDTO periodoRequestDTO) {
         Periodo periodo = periodoRepository.findById(periodoPk)
-                .orElseThrow(()-> new RuntimeException("Periodo no encontrado"+periodoPk));
+                .orElseThrow(()-> new RuntimeException("Periodo no encontrado: "+periodoPk));
         periodo.setXnombre(periodoRequestDTO.getXnombre());
         periodo=periodoRepository.save(periodo);
         return periodoMapper.convertToDTO(periodo);
