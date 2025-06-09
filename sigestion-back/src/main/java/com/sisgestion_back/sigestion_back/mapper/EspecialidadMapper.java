@@ -1,10 +1,7 @@
 package com.sisgestion_back.sigestion_back.mapper;
 
-import com.sisgestion_back.sigestion_back.model.dto.CorteRequestDTO;
-import com.sisgestion_back.sigestion_back.model.dto.CorteResponseDTO;
 import com.sisgestion_back.sigestion_back.model.dto.EspecialidadRequestDTO;
 import com.sisgestion_back.sigestion_back.model.dto.EspecialidadResponseDTO;
-import com.sisgestion_back.sigestion_back.model.entity.Corte;
 import com.sisgestion_back.sigestion_back.model.entity.Especialidad;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;

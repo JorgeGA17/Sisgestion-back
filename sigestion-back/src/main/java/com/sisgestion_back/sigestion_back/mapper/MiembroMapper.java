@@ -2,19 +2,11 @@ package com.sisgestion_back.sigestion_back.mapper;
 
 import com.sisgestion_back.sigestion_back.model.dto.MiembroRequestDTO;
 import com.sisgestion_back.sigestion_back.model.dto.MiembroResponseDTO;
-import com.sisgestion_back.sigestion_back.model.dto.ProyectoResponseDTO;
-import com.sisgestion_back.sigestion_back.model.entity.Cargo;
-import com.sisgestion_back.sigestion_back.model.entity.Especialidad;
 import com.sisgestion_back.sigestion_back.model.entity.Miembro;
-import com.sisgestion_back.sigestion_back.model.entity.Personal;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.modelmapper.ModelMapper;
-
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Component

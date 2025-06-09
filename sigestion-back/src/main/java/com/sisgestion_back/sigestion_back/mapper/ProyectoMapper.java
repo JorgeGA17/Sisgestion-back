@@ -5,11 +5,11 @@ import com.sisgestion_back.sigestion_back.model.entity.*;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Component
 public class ProyectoMapper {

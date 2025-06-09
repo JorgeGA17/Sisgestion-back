@@ -1,6 +1,5 @@
 package com.sisgestion_back.sigestion_back.mapper;
 
-
 import com.sisgestion_back.sigestion_back.model.dto.CorteRequestDTO;
 import com.sisgestion_back.sigestion_back.model.dto.CorteResponseDTO;
 import com.sisgestion_back.sigestion_back.model.entity.Corte;

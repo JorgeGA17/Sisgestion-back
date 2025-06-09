@@ -1,7 +1,6 @@
 package com.sisgestion_back.sigestion_back.mapper;
 
 import com.sisgestion_back.sigestion_back.model.dto.*;
-import com.sisgestion_back.sigestion_back.model.entity.Comision;
 import com.sisgestion_back.sigestion_back.model.entity.Presidente;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
