@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,9 @@ import java.util.List;
 @RequestMapping("/Jerarquias")
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
+
+@PreAuthorize("hasRole('ADMIN')")
+
 public class JerarquiaController {
 
     private final JerarquiaService jerarquiaService;
@@ -34,13 +38,13 @@ public class JerarquiaController {
     }
 
     @PostMapping
-    public ResponseEntity<JerarquiaResponseDTO> createJerarquia(@Validated @RequestBody JerarquiaRequestDTO jerarquiaDTO) {
+     public ResponseEntity<JerarquiaResponseDTO> createJerarquia(@Validated @RequestBody JerarquiaRequestDTO jerarquiaDTO) {
         JerarquiaResponseDTO createdJerarquia = jerarquiaService.createJerarquia(jerarquiaDTO);
         return new ResponseEntity<>(createdJerarquia, HttpStatus.CREATED);
     }
 
     @PutMapping("/{jerarquiaPk}")
-    public ResponseEntity<JerarquiaResponseDTO> updateJerarquia(@PathVariable Long jerarquiaPk, @Valid @RequestBody JerarquiaRequestDTO jerarquiaDTO) {
+       public ResponseEntity<JerarquiaResponseDTO> updateJerarquia(@PathVariable Long jerarquiaPk, @Valid @RequestBody JerarquiaRequestDTO jerarquiaDTO) {
         JerarquiaResponseDTO uptdateJerarquia = jerarquiaService.updateJerarquia(jerarquiaPk,jerarquiaDTO);
         return new ResponseEntity<>(uptdateJerarquia, HttpStatus.OK);
     }

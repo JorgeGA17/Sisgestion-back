@@ -1,5 +1,7 @@
 package com.sisgestion_back.sigestion_back.mapper;
 
+import com.sisgestion_back.sigestion_back.model.dto.AuthResponseDTO;
+import com.sisgestion_back.sigestion_back.model.dto.LoginDTO;
 import com.sisgestion_back.sigestion_back.model.dto.UserProfileDTO;
 import com.sisgestion_back.sigestion_back.model.dto.UserRegistrationDTO;
 import com.sisgestion_back.sigestion_back.model.entity.User;
@@ -27,4 +29,32 @@ public class UserMapper {
 
         return userProfileDTO;
     }
+
+
+    //convertir LoginDTO a User(procesamiento login)
+    public User toUserEntity(LoginDTO loginDTO) {
+        return modelMapper.map(loginDTO, User.class);
+    }
+
+    // Convertir User a AuthResponseDTO para la respuesta de autenticacion
+    public AuthResponseDTO toAuthResponseDTO(User user, String token) {
+        AuthResponseDTO authResponseDTO = new AuthResponseDTO();
+        authResponseDTO.setToken(token);
+
+        //obtener nombre y apellido
+        String xnombre = (user.getPersonal()!=null) ? user.getPersonal().getXnombre()
+                : "Admin";
+
+        String xapellido = (user.getPersonal() != null) ? user.getPersonal().getXapellido()
+                : "User";
+
+        authResponseDTO.setXnombre(xnombre);
+        authResponseDTO.setXapellido(xapellido);
+
+        authResponseDTO.setRole(user.getRole().getName().name());
+
+        return authResponseDTO;
+
+    }
+
 }

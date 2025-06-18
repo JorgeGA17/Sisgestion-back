@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
 @RequestMapping("/Proyectos")
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
+
+
 
 public class ProyectoController {
 
@@ -35,18 +38,21 @@ public class ProyectoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<ProyectoResponseDTO> createProyecto(@Validated @RequestBody ProyectoRequestDTO proyectoDTO) {
         ProyectoResponseDTO createdProyecto = proyectoService.createProyecto(proyectoDTO);
         return new ResponseEntity<>(createdProyecto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{proyectopk}")
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<ProyectoResponseDTO> updateProyecto(@PathVariable Long proyectopk, @Valid @RequestBody ProyectoRequestDTO proyectoDTO) {
         ProyectoResponseDTO uptdateProyecto = proyectoService.updateProyecto(proyectopk,proyectoDTO);
         return new ResponseEntity<>(uptdateProyecto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{proyectopk}")
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<Void> deleteProyecto(@PathVariable Long proyectopk) {
         proyectoService.deleteProyecto(proyectopk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

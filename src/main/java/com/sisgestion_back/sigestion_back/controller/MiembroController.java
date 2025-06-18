@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,9 @@ import java.util.List;
 @RequestMapping("/Miembros")
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
+
+@PreAuthorize("hasRole('ADMIN')")
+
 public class MiembroController {
 
     private final MiembroService miembroService;
@@ -33,18 +37,21 @@ public class MiembroController {
     }
 
     @PostMapping
+
     public ResponseEntity<MiembroResponseDTO> createMiembro(@Validated @RequestBody MiembroRequestDTO miembroDTO) {
         MiembroResponseDTO createdMiembro = miembroService.createMiembro(miembroDTO);
         return new ResponseEntity<>(createdMiembro, HttpStatus.CREATED);
     }
 
     @PutMapping("/{miembroPk}")
+
     public ResponseEntity<MiembroResponseDTO> updateMiembro(@PathVariable Long miembroPk, @Valid @RequestBody MiembroRequestDTO miembroDTO) {
         MiembroResponseDTO updatedMiembro = miembroService.updateMiembro(miembroPk, miembroDTO);
         return new ResponseEntity<>(updatedMiembro, HttpStatus.OK);
     }
 
     @DeleteMapping("/{miembroPk}")
+
     public ResponseEntity<Void> deleteMiembro(@PathVariable Long miembroPk) {
         miembroService.deleteMiembro(miembroPk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

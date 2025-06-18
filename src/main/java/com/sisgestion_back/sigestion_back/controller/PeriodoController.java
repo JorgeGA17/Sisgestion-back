@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,8 @@ import java.util.List;
 @RequestMapping("/Periodos")
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
+
+@PreAuthorize("hasRole('ADMIN')")
 
 public class PeriodoController {
 
@@ -34,18 +37,21 @@ public class PeriodoController {
     }
 
     @PostMapping
+
     public ResponseEntity<PeriodoResponseDTO> createPeriodo(@Validated @RequestBody PeriodoRequestDTO periodoDTO) {
         PeriodoResponseDTO createdPeriodo = periodoService.createPeriodo(periodoDTO);
         return new ResponseEntity<>(createdPeriodo, HttpStatus.CREATED);
     }
 
     @PutMapping("/{periodoPk}")
+
     public ResponseEntity<PeriodoResponseDTO> updatePeriodo(@PathVariable Long periodoPk, @Valid @RequestBody PeriodoRequestDTO periodoDTO) {
         PeriodoResponseDTO updatedPeriodo = periodoService.updatePeriodo(periodoPk, periodoDTO);
         return new ResponseEntity<>(updatedPeriodo, HttpStatus.OK);
     }
 
     @DeleteMapping("/{periodoPk}")
+
     public ResponseEntity<Void> deletePeriodo(@PathVariable Long periodoPk) {
         periodoService.deletePeriodo(periodoPk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
