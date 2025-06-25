@@ -1,17 +1,17 @@
 package com.sisgestion_back.sigestion_back.model.entity;
 
+import com.sisgestion_back.sigestion_back.Audit.Config.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "eje")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Eje {
+public class Eje extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "eje_pk")
@@ -22,9 +22,5 @@ public class Eje {
 
     @Column(name = "x_resumen")
     private String xresumen;
-
-    @Column(name = "f_fecha_registro")
-    private LocalDateTime fFechaRegistro;
-
 
 }

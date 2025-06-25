@@ -20,10 +20,13 @@ public class UserRegistrationDTO {
     @NotBlank (message = "El correo es obligatorio")
     private String xcorreoInstitucional;
 
+    @NotBlank (message = "El DNI es obligatorio")
+    private String nnumeroDocumento;
+
+    @NotBlank (message = "La ocupacion es obligatorio")
+    private String xocupacion;
+
     @NotNull(message = "La contraseña es obligatoria")
     @Size(min=4, message = "la contraseña debe tener al menos 4 digitos")
     private String password;
-
-
-
 }

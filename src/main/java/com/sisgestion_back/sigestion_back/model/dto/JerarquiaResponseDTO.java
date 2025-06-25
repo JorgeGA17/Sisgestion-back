@@ -15,5 +15,5 @@ public class JerarquiaResponseDTO {
 
     private Long jerarquiaPk;
     private String xNombre;
-    private LocalDateTime fFechaRegistro;
+
 }

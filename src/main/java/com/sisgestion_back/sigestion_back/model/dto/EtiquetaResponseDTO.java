@@ -16,7 +16,7 @@ public class EtiquetaResponseDTO {
     private Long etiquetaPk;
     private String xnombre;
     private String xcampo;
-    private LocalDateTime fFechaRegistro;
+
 
 
 }

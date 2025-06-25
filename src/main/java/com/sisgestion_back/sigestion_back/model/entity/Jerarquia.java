@@ -1,5 +1,6 @@
 package com.sisgestion_back.sigestion_back.model.entity;
 
+import com.sisgestion_back.sigestion_back.Audit.Config.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "jerarquia")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Jerarquia {
+public class Jerarquia extends AuditableEntity  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +21,6 @@ public class Jerarquia {
 
     @Column(name ="x_nombre")
     private String xnombre;
-
-    @Column(name = "f_fecha_registro")
-    private LocalDateTime fFechaRegistro;
 
 
 }

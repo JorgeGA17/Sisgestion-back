@@ -1,6 +1,5 @@
 package com.sisgestion_back.sigestion_back.controller;
 
-
 import com.sisgestion_back.sigestion_back.model.dto.AuthResponseDTO;
 import com.sisgestion_back.sigestion_back.model.dto.LoginDTO;
 import com.sisgestion_back.sigestion_back.model.dto.UserProfileDTO;
@@ -20,7 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController{
 
-    private final UserService userService; // C
+    private final UserService userService; //
+
+    //Registrar ADMIN
+    @RequestMapping("/register/admin")
+    public ResponseEntity<UserProfileDTO> registerAdmin (@Valid @RequestBody UserRegistrationDTO userRegistrationDTO) {
+        UserProfileDTO userProfileDTO = userService.registerAdmin(userRegistrationDTO);
+        return new ResponseEntity<>(userProfileDTO, HttpStatus.CREATED);
+    }
 
     //Registrar Secretario
     @RequestMapping("/register/secretario")
@@ -41,8 +47,4 @@ public class AuthController{
         AuthResponseDTO authResponseDTO = userService.login(loginDTO);
         return new ResponseEntity<>(authResponseDTO, HttpStatus.OK);
     }
-
-
-
-
 }

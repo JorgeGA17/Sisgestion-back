@@ -1,10 +1,11 @@
 package com.sisgestion_back.sigestion_back.model.entity;
 
+import com.sisgestion_back.sigestion_back.Audit.Config.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+
 import java.util.List;
 
 @Data
@@ -12,7 +13,7 @@ import java.util.List;
 @Table(name = "comision")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comision {
+public class Comision extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +22,6 @@ public class Comision {
 
     @Column(name = "x_descripcion")
     private String xdescripcion;
-
-    @Column(name = "f_fecha_registro")
-    private LocalDateTime fFechaRegistro;
 
     @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinColumn(name = "corte_fk")

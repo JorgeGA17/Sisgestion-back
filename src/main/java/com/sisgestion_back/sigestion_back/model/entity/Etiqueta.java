@@ -1,10 +1,10 @@
 package com.sisgestion_back.sigestion_back.model.entity;
 
+import com.sisgestion_back.sigestion_back.Audit.Config.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Etiqueta {
+public class Etiqueta extends AuditableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "etiqueta_pk")
@@ -23,8 +23,5 @@ public class Etiqueta {
 
     @Column(name ="x_campo")
     private String xcampo;
-
-    @Column(name = "f_fecha_registro")
-    private LocalDateTime fFechaRegistro;
 
 }

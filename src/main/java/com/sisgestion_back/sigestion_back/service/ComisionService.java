@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.sisgestion_back.sigestion_back.Audit.Config.JpaAuditingConfig.AuditContextUtils.*;
+
 @Service
 @AllArgsConstructor
 public class ComisionService {
@@ -41,7 +43,7 @@ public class ComisionService {
     @Transactional
     public ComisionResponseDTO createComision (ComisionRequestDTO comisionRequestDTO) {
         Comision comision = comisionMapper.convertToEntity(comisionRequestDTO);
-        comision.setFFechaRegistro(LocalDateTime.now());
+
 
         //Obtener y asignar entidades ManyToOne (Corte y Periodo)
         Corte corte = corteRepository.findById(comisionRequestDTO.getCorteId())
@@ -50,6 +52,12 @@ public class ComisionService {
                 .orElseThrow(() -> new RuntimeException("Periodo no encontrado con ID: " + comisionRequestDTO.getPeriodoId()));
         comision.setCortefk(corte);
         comision.setPeriodofk(periodo);
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        comision.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        comision.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        comision.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        comision.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
 
         comisionRepository.save(comision);
         return comisionMapper.convertToDTO(comision);
@@ -67,6 +75,14 @@ public class ComisionService {
                 .orElseThrow(() -> new RuntimeException("Periodo no encontrado con ID: " + comisionRequestDTO.getPeriodoId()));
         comision.setCortefk(corte);
         comision.setPeriodofk(periodo);
+
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        comision.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        comision.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        comision.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        comision.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
 
         comision=comisionRepository.save(comision);
         return comisionMapper.convertToDTO(comision);

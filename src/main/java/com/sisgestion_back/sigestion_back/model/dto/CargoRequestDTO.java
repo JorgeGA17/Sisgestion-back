@@ -12,6 +12,5 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CargoRequestDTO {
     private String xnombre;
-    private LocalDateTime fFechaRegistro;
 
 }

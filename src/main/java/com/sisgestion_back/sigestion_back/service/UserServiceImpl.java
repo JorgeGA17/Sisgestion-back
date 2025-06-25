@@ -24,6 +24,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+import static com.sisgestion_back.sigestion_back.Audit.Config.JpaAuditingConfig.AuditContextUtils.*;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -34,10 +36,14 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-
     private final TokenProvider tokenProvider;
 
 
+
+    @Override
+    public UserProfileDTO registerAdmin(UserRegistrationDTO userRegistrationDTO) {
+        return registerUserWithRole(userRegistrationDTO, ERole.ADMIN);
+    }
 
     @Override
     public UserProfileDTO registerSecretario(UserRegistrationDTO userRegistrationDTO) {
@@ -55,7 +61,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(()-> new ResourceNotFoundException("Usuario no encontrado"));
 
         //verificar si el email existe o si hay usuario con nombre y apellido
-
         boolean existAsPersonal = personalRepository.existsByXnombreAndXapellido(userProfileDTO.getXnombre(), userProfileDTO.getXapellido());
 
         if (existAsPersonal) {
@@ -67,6 +72,13 @@ public class UserServiceImpl implements UserService {
             user.getPersonal().setXapellido(userProfileDTO.getXapellido());
         }
 
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        user.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        user.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        user.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        user.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
         User updateUser = userRepository.save(user);
 
         return userMapper.toUserProfileDTO(updateUser);
@@ -75,7 +87,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public AuthResponseDTO login(LoginDTO loginDTO) {
         // autenticacion de usuario con autenticationmanager
-
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDTO.getXcorreoInstitucional(), loginDTO.getPassword())
         );
@@ -91,7 +102,6 @@ public class UserServiceImpl implements UserService {
         return responseDTO;
     }
 
-
     @Override
     public UserProfileDTO getUserById(long userPk) {
        User user = userRepository.findById(userPk)
@@ -102,15 +112,12 @@ public class UserServiceImpl implements UserService {
     private UserProfileDTO registerUserWithRole(UserRegistrationDTO userRegistrationDTO, ERole roleEnum) {
 
         //verificar si el email existe o si hay usuario con nombre y apellido
-
         boolean existByXcorreoInstitucional = userRepository.existsByXcorreoInstitucional(userRegistrationDTO.getXcorreoInstitucional());
         boolean existAsPersonal = personalRepository.existsByXnombreAndXapellido(userRegistrationDTO.getXnombre(), userRegistrationDTO.getXapellido());
-
 
         if (existByXcorreoInstitucional) {
             throw new IllegalArgumentException("Ya existe un usuario con ese correo");
         }
-
 
         if (existAsPersonal) {
             throw new IllegalArgumentException("Ya existe un usuario con ese nombre y apellido");
@@ -118,7 +125,6 @@ public class UserServiceImpl implements UserService {
 
         Role role = roleRepository.findByName(roleEnum)
                 .orElseThrow(() -> new IllegalArgumentException("Error: Rol no existe"));
-
 
         userRegistrationDTO.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
 
@@ -129,7 +135,10 @@ public class UserServiceImpl implements UserService {
             Personal personal  = new Personal();
             personal.setXnombre(userRegistrationDTO.getXnombre());
             personal.setXapellido(userRegistrationDTO.getXapellido());
-            personal.setFFechaRegistro(LocalDateTime.now());
+            personal.setNnumeroDocumento(userRegistrationDTO.getNnumeroDocumento());
+            personal.setXocupacion(userRegistrationDTO.getXocupacion());
+            personal.setXnombreCompleto(userRegistrationDTO.getXnombre()+ " " + userRegistrationDTO.getXapellido());
+
             personal.setUser(user);
             user.setPersonal(personal);
 
@@ -137,16 +146,32 @@ public class UserServiceImpl implements UserService {
             Personal personal  = new Personal();
             personal.setXnombre(userRegistrationDTO.getXnombre());
             personal.setXapellido(userRegistrationDTO.getXapellido());
-            personal.setFFechaRegistro(LocalDateTime.now());
+            personal.setNnumeroDocumento(userRegistrationDTO.getNnumeroDocumento());
+            personal.setXocupacion(userRegistrationDTO.getXocupacion());
+            personal.setXnombreCompleto(userRegistrationDTO.getXnombre()+ " " + userRegistrationDTO.getXapellido());
+
+            personal.setUser(user);
+            user.setPersonal(personal);
+        }
+        else if (roleEnum == ERole.ADMIN) {
+            Personal personal  = new Personal();
+            personal.setXnombre(userRegistrationDTO.getXnombre());
+            personal.setXapellido(userRegistrationDTO.getXapellido());
+            personal.setNnumeroDocumento(userRegistrationDTO.getNnumeroDocumento());
+            personal.setXocupacion(userRegistrationDTO.getXocupacion());
+            personal.setXnombreCompleto(userRegistrationDTO.getXnombre()+ " " + userRegistrationDTO.getXapellido());
+
             personal.setUser(user);
             user.setPersonal(personal);
         }
 
-        User savedUser = userRepository.save(user);
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        user.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        user.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        user.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        user.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
 
+        User savedUser = userRepository.save(user);
         return userMapper.toUserProfileDTO(savedUser);
     }
-
-
-
 }

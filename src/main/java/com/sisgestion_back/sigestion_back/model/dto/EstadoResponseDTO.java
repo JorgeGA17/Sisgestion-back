@@ -18,6 +18,5 @@ public class EstadoResponseDTO {
     private Long estadoPk;
     private String xnombre;
     private String xresumen;
-    private LocalDateTime fFechaRegistro;
 
 }

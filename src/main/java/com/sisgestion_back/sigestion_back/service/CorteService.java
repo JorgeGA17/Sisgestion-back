@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.sisgestion_back.sigestion_back.Audit.Config.JpaAuditingConfig.AuditContextUtils.*;
+
 @Service
 @AllArgsConstructor
 
@@ -36,7 +38,13 @@ public class CorteService {
     @Transactional
     public CorteResponseDTO createCorte (CorteRequestDTO corteRequestDTO) {
         Corte corte = corteMapper.convertToEntity(corteRequestDTO);
-        corte.setFFechaRegistro(LocalDateTime.now());
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        corte.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        corte.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        corte.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        corte.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
         corteRepository.save(corte);
         return corteMapper.convertToDTO(corte);
     }
@@ -47,6 +55,14 @@ public class CorteService {
                 .orElseThrow(()-> new RuntimeException("Corte no encontrada: "+cortePk));
       corte.setXnombre(corteRequestDTO.getXnombre());
       corte.setXnombreCorto(corteRequestDTO.getXnombreCorto());
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        corte.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        corte.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        corte.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        corte.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
+
         corte=corteRepository.save(corte);
         return corteMapper.convertToDTO(corte);
     }

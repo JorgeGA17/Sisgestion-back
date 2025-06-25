@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.sisgestion_back.sigestion_back.Audit.Config.JpaAuditingConfig.AuditContextUtils.*;
+
 @Service
 @AllArgsConstructor
 public class MiembroService {
@@ -41,7 +43,7 @@ public class MiembroService {
     @Transactional
     public MiembroResponseDTO createMiembro (MiembroRequestDTO miembroRequestDTO) {
         Miembro miembro = miembroMapper.convertToEntity(miembroRequestDTO);
-        miembro.setFFechaRegistro(LocalDateTime.now());
+
 
         //Obtener y asignar entidades ManyToOne (Corte y Periodo)
         Comision comision = comisionRepository.findById(miembroRequestDTO.getComisionId())
@@ -54,6 +56,12 @@ public class MiembroService {
         miembro.setComisionfk(comision);
         miembro.setPersonalfk(personal);
         miembro.setCargofk(cargo);
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        miembro.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        miembro.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        miembro.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        miembro.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
 
         miembroRepository.save(miembro);
         return miembroMapper.convertToDTO(miembro);
@@ -76,6 +84,11 @@ public class MiembroService {
         miembro.setPersonalfk(personal);
         miembro.setCargofk(cargo);
 
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        miembro.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        miembro.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        miembro.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        miembro.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
 
         miembro=miembroRepository.save(miembro);
         return miembroMapper.convertToDTO(miembro);

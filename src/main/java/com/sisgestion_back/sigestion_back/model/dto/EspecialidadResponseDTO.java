@@ -14,6 +14,6 @@ public class EspecialidadResponseDTO {
 
     private Long especialidadPk;
     private String xnombre;
-    private LocalDateTime fFechaRegistro;
+
 
 }

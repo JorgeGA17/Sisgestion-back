@@ -1,12 +1,13 @@
 package com.sisgestion_back.sigestion_back.model.entity;
 
+import com.sisgestion_back.sigestion_back.Audit.Config.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "users")
-public class User {
+public class User  extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

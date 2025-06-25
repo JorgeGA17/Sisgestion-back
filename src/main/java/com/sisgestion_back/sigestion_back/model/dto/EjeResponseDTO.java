@@ -17,5 +17,5 @@ public class EjeResponseDTO {
     private Long ejePk;
     private String xnombre;
     private String xresumen;
-    private LocalDateTime fFechaRegistro;
+
 }

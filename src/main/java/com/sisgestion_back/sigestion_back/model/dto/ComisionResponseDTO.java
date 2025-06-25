@@ -17,7 +17,7 @@ public class ComisionResponseDTO {
 
     private Long comisionPk;
     private String xdescripcion;
-    private LocalDateTime fFechaRegistro;
+
 
     // Campos para relaciones ManyToOne
     private Long corteId;

@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.sisgestion_back.sigestion_back.Audit.Config.JpaAuditingConfig.AuditContextUtils.*;
+
 @Service
 @AllArgsConstructor
 public class EstadoService {
@@ -35,7 +37,14 @@ public class EstadoService {
     @Transactional
     public EstadoResponseDTO createEstado (EstadoRequestDTO estadoRequestDTO) {
         Estado estado = estadoMapper.convertToEntity(estadoRequestDTO);
-        estado.setFFechaRegistro(LocalDateTime.now());
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        estado.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        estado.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        estado.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        estado.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
+
         estadoRepository.save(estado);
         return estadoMapper.convertToDTO(estado);
     }
@@ -46,6 +55,13 @@ public class EstadoService {
                 .orElseThrow(()-> new RuntimeException("Estado no encontrada: "+estadoPk));
         estado.setXnombre(estadoRequestDTO.getXnombre());
         estado.setXresumen(estadoRequestDTO.getXresumen());
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        estado.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        estado.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        estado.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        estado.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
         estado=estadoRepository.save(estado);
         return estadoMapper.convertToDTO(estado);
     }

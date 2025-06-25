@@ -1,10 +1,11 @@
 package com.sisgestion_back.sigestion_back.model.entity;
 
+import com.sisgestion_back.sigestion_back.Audit.Config.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Table(name = "personal")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Personal {
+public class Personal extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,10 +38,6 @@ public class Personal {
 
     @Column(name = "x_ocupacion")
     private String xocupacion;
-
-    @Column(name = "f_fecha_registro")
-    private LocalDateTime fFechaRegistro;
-
 
     @OneToMany (mappedBy = "personalfk", cascade = CascadeType.ALL)
     private List<Presidente> presidentes= new ArrayList<>();

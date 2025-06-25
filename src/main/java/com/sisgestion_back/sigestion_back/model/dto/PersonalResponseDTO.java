@@ -14,13 +14,12 @@ import java.time.LocalDateTime;
 public class PersonalResponseDTO {
 
     private Long personalPk;
-    private String xtipoDocumento;
+
     private String nnumeroDocumento;
     private String xnombreCompleto;
     private String xnombre;
     private String xapellido;
     private String xocupacion;
-    private String xcorreoInstitucional;
-    private LocalDateTime fFechaRegistro;
+
 
 }

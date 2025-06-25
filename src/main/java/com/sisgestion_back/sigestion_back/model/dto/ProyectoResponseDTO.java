@@ -21,7 +21,6 @@ public class ProyectoResponseDTO {
     private Integer xsostenibilidad;
     private Integer xreplicabilidad;
     private Integer npeso;
-    private LocalDateTime fFechaRegistro;
     private String xconceptoEval;
     private String xdescripEval;
 

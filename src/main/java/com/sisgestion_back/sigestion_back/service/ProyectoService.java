@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
+import static com.sisgestion_back.sigestion_back.Audit.Config.JpaAuditingConfig.AuditContextUtils.*;
+
 
 @Service
 @AllArgsConstructor
@@ -64,7 +66,7 @@ public class ProyectoService {
         Proyecto proyecto = proyectoMapper.convertToEntity(proyectoRequestDTO);
 
         // 2. Asignar la fecha de registro
-        proyecto.setFFechaRegistro(LocalDateTime.now());
+
 
         // 3. Obtener y asignar entidades ManyToOne (Corte y Estado)
         Corte corte = corteRepository.findById(proyectoRequestDTO.getCorteId())
@@ -84,6 +86,12 @@ public class ProyectoService {
         // 5. Calcular y asignar npeso
         Integer npeso = proyecto.getXimpacto() + proyecto.getXinnovacion() + proyecto.getXsostenibilidad() + proyecto.getXreplicabilidad();
         proyecto.setNpeso(npeso);
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        proyecto.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        proyecto.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        proyecto.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        proyecto.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
 
         // 6. Guardar el proyecto y convertir a DTO de respuesta
         proyectoRepository.save(proyecto);
@@ -128,6 +136,12 @@ public class ProyectoService {
         // 5. Recalcular npeso
         Integer npeso = proyecto.getXimpacto() + proyecto.getXinnovacion() + proyecto.getXsostenibilidad() + proyecto.getXreplicabilidad();
         proyecto.setNpeso(npeso);
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        proyecto.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        proyecto.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        proyecto.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        proyecto.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
 
         // 6. Guardar los cambios y convertir a DTO de respuesta
         proyecto = proyectoRepository.save(proyecto);

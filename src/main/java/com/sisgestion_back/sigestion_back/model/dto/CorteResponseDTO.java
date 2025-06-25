@@ -19,6 +19,6 @@ public class CorteResponseDTO {
     private Long cortePk;
     private String xnombre;
     private String xnombreCorto;
-    private LocalDateTime fFechaRegistro;
+
 
 }

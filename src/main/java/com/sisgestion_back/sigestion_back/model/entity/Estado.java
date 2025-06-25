@@ -2,11 +2,12 @@ package com.sisgestion_back.sigestion_back.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sisgestion_back.sigestion_back.Audit.Config.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Estado {
+public class Estado extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +29,6 @@ public class Estado {
 
     @Column(name ="x_resumen")
     private String xresumen;
-
-    @Column(name = "f_fecha_registro")
-    private LocalDateTime fFechaRegistro;
 
     @OneToMany(mappedBy = "estadofk", cascade = CascadeType.ALL)
     @JsonBackReference

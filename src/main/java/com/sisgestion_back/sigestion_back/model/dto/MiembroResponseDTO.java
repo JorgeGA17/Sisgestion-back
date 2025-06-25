@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 public class MiembroResponseDTO {
     private Long miembroPk;
-    private LocalDateTime fFechaRegistro;
 
     // Campos para relaciones ManyToOne
     private Long comisionId;

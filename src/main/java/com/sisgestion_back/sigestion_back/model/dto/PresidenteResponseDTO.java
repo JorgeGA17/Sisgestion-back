@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 public class PresidenteResponseDTO {
 
     private Long presidentePk;
-    private LocalDateTime fFechaRegistro;
 
     // Campos para relaciones ManyToOne
     private Long periodoId;

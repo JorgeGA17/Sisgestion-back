@@ -14,7 +14,5 @@ import java.time.LocalDateTime;
 public class PeriodoResponseDTO {
     private Long periodoPk;
     private String xnombre;
-    private LocalDateTime fFechaRegistro;
-
 
 }

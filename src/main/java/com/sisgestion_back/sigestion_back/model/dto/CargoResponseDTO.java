@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class CargoResponseDTO {
     private Long cargoPk;
     private String xnombre;
-    private LocalDateTime fFechaRegistro;
+
 
 
 }

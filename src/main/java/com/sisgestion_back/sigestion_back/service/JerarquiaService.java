@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.sisgestion_back.sigestion_back.Audit.Config.JpaAuditingConfig.AuditContextUtils.*;
+
 @Service
 @AllArgsConstructor
 public class JerarquiaService {
@@ -36,7 +38,13 @@ public class JerarquiaService {
     @Transactional
     public JerarquiaResponseDTO createJerarquia (JerarquiaRequestDTO jerarquiaRequestDTO) {
         Jerarquia jerarquia = jerarquiaMapper.convertToEntity(jerarquiaRequestDTO);
-        jerarquia.setFFechaRegistro(LocalDateTime.now());
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        jerarquia.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        jerarquia.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        jerarquia.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        jerarquia.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
         jerarquiaRepository.save(jerarquia);
         return jerarquiaMapper.convertToDTO(jerarquia);
     }
@@ -46,6 +54,13 @@ public class JerarquiaService {
         Jerarquia jerarquia = jerarquiaRepository.findById(jerarquiaPk)
                 .orElseThrow(()-> new RuntimeException("Jerarquia no encontrada: "+ jerarquiaPk));
         jerarquia.setXnombre(jerarquiaRequestDTO.getXnombre());
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        jerarquia.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        jerarquia.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        jerarquia.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        jerarquia.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
         jerarquia=jerarquiaRepository.save(jerarquia);
         return jerarquiaMapper.convertToDTO(jerarquia);
     }

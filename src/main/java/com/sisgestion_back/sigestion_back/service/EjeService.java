@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.sisgestion_back.sigestion_back.Audit.Config.JpaAuditingConfig.AuditContextUtils.*;
+
 @Service
 @AllArgsConstructor
 public class EjeService {
@@ -34,7 +36,13 @@ public class EjeService {
         @Transactional
         public EjeResponseDTO createEje(EjeRequestDTO ejeRequestDTO) {
             Eje eje = ejeMapper.convertToEntity(ejeRequestDTO);
-            eje.setFFechaRegistro(LocalDateTime.now());
+
+            // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+            eje.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+            eje.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+            eje.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+            eje.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
             ejeRepository.save(eje);
             return ejeMapper.convertToDTO(eje);
         }
@@ -45,6 +53,13 @@ public class EjeService {
                     .orElseThrow(() -> new RuntimeException("Eje no encontrado: " + ejePk));
             eje.setXnombre(ejeRequestDTO.getXnombre());
             eje.setXresumen(ejeRequestDTO.getXresumen());
+
+            // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+            eje.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+            eje.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+            eje.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+            eje.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
+
             eje = ejeRepository.save(eje);
             return ejeMapper.convertToDTO(eje);
         }

@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.sisgestion_back.sigestion_back.Audit.Config.JpaAuditingConfig.AuditContextUtils.*;
+
 @Service
 @AllArgsConstructor
 public class PresidenteService {
@@ -41,7 +43,7 @@ public class PresidenteService {
     @Transactional
     public PresidenteResponseDTO createPresidente(PresidenteRequestDTO presidenteRequestDTO) {
         Presidente presidente = presidenteMapper.convertToEntity(presidenteRequestDTO);
-        presidente.setFFechaRegistro(LocalDateTime.now());
+
 
         //Obtener y asignar entidades ManyToOne (Corte y Periodo)
         Periodo periodo = periodoRepository.findById(presidenteRequestDTO.getPeriodoId())
@@ -54,6 +56,12 @@ public class PresidenteService {
         presidente.setPeriodofk(periodo);
         presidente.setPersonalfk(personal);
         presidente.setCortefk(corte);
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        presidente.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        presidente.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        presidente.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        presidente.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
 
         presidenteRepository.save(presidente);
         return presidenteMapper.convertToDTO(presidente);
@@ -75,6 +83,12 @@ public class PresidenteService {
         presidente.setPeriodofk(periodo);
         presidente.setPersonalfk(personal);
         presidente.setCortefk(corte);
+
+        // Llenar los campos de auditoría que requieren información del contexto de la solicitud
+        presidente.setCAudUidred("usuario_red_ejemplo"); // Aquí deberías obtenerlo del contexto o DTO
+        presidente.setCAudPc(getClientHostname()); // Obtiene el nombre del host (del servidor o del proxy, no cliente)
+        presidente.setNAudIp(getClientIpAddress()); // Obtiene la IP del cliente (si está detrás de proxy X-Forwarded-For)
+        presidente.setCAudMcaddr(getClientMacAddress()); // Muy difícil de obtener del cliente de forma fiable
 
         presidente=presidenteRepository.save(presidente);
         return presidenteMapper.convertToDTO(presidente);

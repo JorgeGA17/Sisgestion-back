@@ -1,10 +1,11 @@
 package com.sisgestion_back.sigestion_back.model.entity;
 
+import com.sisgestion_back.sigestion_back.Audit.Config.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+
 import java.util.List;
 
 @Data
@@ -12,7 +13,7 @@ import java.util.List;
 @Table(name = "proyecto")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Proyecto {
+public class Proyecto extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,9 +46,6 @@ public class Proyecto {
 
     @Column(name = "n_peso")
     private Integer npeso;
-
-    @Column(name = "f_fecha_registro")
-    private LocalDateTime fFechaRegistro;
 
     @Column(name = "x_concepto_eval", columnDefinition = "TEXT")
     private String xconceptoEval;
