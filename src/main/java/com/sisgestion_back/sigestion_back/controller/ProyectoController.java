@@ -17,8 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
 
-
-
 public class ProyectoController {
 
     private final ProyectoService proyectoService;
