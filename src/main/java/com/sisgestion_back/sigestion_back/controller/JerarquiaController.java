@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
 
-@PreAuthorize("hasRole('ADMIN')")
+
 
 public class JerarquiaController {
 
@@ -38,18 +38,21 @@ public class JerarquiaController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
      public ResponseEntity<JerarquiaResponseDTO> createJerarquia(@Validated @RequestBody JerarquiaRequestDTO jerarquiaDTO) {
         JerarquiaResponseDTO createdJerarquia = jerarquiaService.createJerarquia(jerarquiaDTO);
         return new ResponseEntity<>(createdJerarquia, HttpStatus.CREATED);
     }
 
     @PutMapping("/{jerarquiaPk}")
+    @PreAuthorize("hasRole('ADMIN')")
        public ResponseEntity<JerarquiaResponseDTO> updateJerarquia(@PathVariable Long jerarquiaPk, @Valid @RequestBody JerarquiaRequestDTO jerarquiaDTO) {
         JerarquiaResponseDTO uptdateJerarquia = jerarquiaService.updateJerarquia(jerarquiaPk,jerarquiaDTO);
         return new ResponseEntity<>(uptdateJerarquia, HttpStatus.OK);
     }
 
     @DeleteMapping("/{jerarquiaPk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteJerarquia(@PathVariable Long jerarquiaPk) {
         jerarquiaService.deleteJerarquia(jerarquiaPk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

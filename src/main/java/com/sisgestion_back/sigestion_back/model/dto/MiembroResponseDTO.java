@@ -19,6 +19,7 @@ public class MiembroResponseDTO {
 
     private Long personalId;
     private String personalNombre;
+    private String personalCorreo;
 
     private Long cargoId;
     private String cargoNombre;

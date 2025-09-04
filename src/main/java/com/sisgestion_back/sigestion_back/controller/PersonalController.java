@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
 
-@PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
 public class PersonalController {
 
     private final PersonalService personalService;
@@ -36,18 +35,21 @@ public class PersonalController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<PersonalResponseDTO> createPersonal(@Validated @RequestBody PersonalRequestDTO personalDTO) {
         PersonalResponseDTO createdPersonal = personalService.createPersonal(personalDTO);
         return new ResponseEntity<>(createdPersonal, HttpStatus.CREATED);
     }
 
     @PutMapping("/{personalPk}")
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<PersonalResponseDTO> updatePersonal(@PathVariable Long personalPk, @Valid @RequestBody PersonalRequestDTO personalDTO) {
         PersonalResponseDTO updatedPersonal = personalService.updatePersonal(personalPk, personalDTO);
         return new ResponseEntity<>(updatedPersonal, HttpStatus.OK);
     }
 
     @DeleteMapping("/{personalPk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletePersonal(@PathVariable Long personalPk) {
         personalService.deletePersonal(personalPk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

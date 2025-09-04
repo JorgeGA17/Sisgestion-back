@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
 
-@PreAuthorize("hasRole('ADMIN')")
 public class EspecialidadController {
 
     private final EspecialidadService especialidadService;
@@ -33,22 +32,24 @@ public class EspecialidadController {
     public ResponseEntity<EspecialidadResponseDTO> getEspecialidadById(@PathVariable Long especialidadPk) {
         EspecialidadResponseDTO especialidad= especialidadService.getEspecialidadById(especialidadPk);
         return new ResponseEntity<>(especialidad, HttpStatus.OK);
-
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<EspecialidadResponseDTO> createEspecialidad(@Validated @RequestBody EspecialidadRequestDTO especialidadDTO) {
         EspecialidadResponseDTO createdEspecialidad = especialidadService.createEspecialidad(especialidadDTO);
         return new ResponseEntity<>(createdEspecialidad, HttpStatus.CREATED);
     }
 
     @PutMapping("/{especialidadPk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<EspecialidadResponseDTO> updateEspecialidad(@PathVariable Long especialidadPk, @Valid @RequestBody EspecialidadRequestDTO especialidadDTO) {
         EspecialidadResponseDTO uptdateEspecialidad = especialidadService.updateEspecialidad(especialidadPk,especialidadDTO);
         return new ResponseEntity<>(uptdateEspecialidad, HttpStatus.OK);
     }
 
     @DeleteMapping("/{especialidadPk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteEspecialidad(@PathVariable Long especialidadPk) {
         especialidadService.deleteEspecialidad(especialidadPk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

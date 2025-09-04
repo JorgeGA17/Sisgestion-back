@@ -18,9 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
 
-@PreAuthorize("hasRole('ADMIN')")
-
-
 public class EjeController {
     private final EjeService ejeService;
 
@@ -37,18 +34,21 @@ public class EjeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<EjeResponseDTO> createEje(@Validated @RequestBody EjeRequestDTO ejeDTO) {
         EjeResponseDTO createdEje = ejeService.createEje(ejeDTO);
         return new ResponseEntity<>(createdEje, HttpStatus.CREATED);
     }
 
     @PutMapping("/{ejePk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<EjeResponseDTO> updateEje(@PathVariable Long ejePk, @Valid @RequestBody EjeRequestDTO ejeDTO) {
         EjeResponseDTO updatedEje = ejeService.updateEje(ejePk, ejeDTO);
         return new ResponseEntity<>(updatedEje, HttpStatus.OK);
     }
 
     @DeleteMapping("/{ejePk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteEje(@PathVariable Long ejePk) {
         ejeService.deleteEje(ejePk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

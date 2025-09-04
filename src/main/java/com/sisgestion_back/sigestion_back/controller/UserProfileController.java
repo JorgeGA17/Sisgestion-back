@@ -6,11 +6,13 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user/profile")
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 public class UserProfileController {
 
     private final UserService userService;

@@ -40,6 +40,9 @@ public class Audpersonal extends AuditableTrailEntity {
     @Column(name = "x_ocupacion")
     private String xocupacion;
 
+    @Column(name = "x_correo_institucional", nullable = false, unique = true)
+    private String xcorreoInstitucional;
+
 
     //Datos de Control
 

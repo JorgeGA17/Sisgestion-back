@@ -33,9 +33,11 @@ public class MiembroMapper {
         if (miembro.getPersonalfk() != null) {
             miembroResponseDTO.setPersonalId(miembro.getPersonalfk().getPersonalPk());
             miembroResponseDTO.setPersonalNombre(miembro.getPersonalfk().getXnombreCompleto());
+            miembroResponseDTO.setPersonalCorreo(miembro.getPersonalfk().getXcorreoInstitucional());
         } else {
             miembroResponseDTO.setPersonalId(null);
             miembroResponseDTO.setPersonalNombre(null);
+            miembroResponseDTO.setPersonalCorreo(null);
         }
 
         if (miembro.getCargofk() != null) {

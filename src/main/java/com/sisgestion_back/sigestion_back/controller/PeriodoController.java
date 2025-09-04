@@ -18,8 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
 
-@PreAuthorize("hasRole('ADMIN')")
-
 public class PeriodoController {
 
     private final PeriodoService periodoService;
@@ -37,21 +35,21 @@ public class PeriodoController {
     }
 
     @PostMapping
-
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<PeriodoResponseDTO> createPeriodo(@Validated @RequestBody PeriodoRequestDTO periodoDTO) {
         PeriodoResponseDTO createdPeriodo = periodoService.createPeriodo(periodoDTO);
         return new ResponseEntity<>(createdPeriodo, HttpStatus.CREATED);
     }
 
     @PutMapping("/{periodoPk}")
-
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<PeriodoResponseDTO> updatePeriodo(@PathVariable Long periodoPk, @Valid @RequestBody PeriodoRequestDTO periodoDTO) {
         PeriodoResponseDTO updatedPeriodo = periodoService.updatePeriodo(periodoPk, periodoDTO);
         return new ResponseEntity<>(updatedPeriodo, HttpStatus.OK);
     }
 
     @DeleteMapping("/{periodoPk}")
-
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletePeriodo(@PathVariable Long periodoPk) {
         periodoService.deletePeriodo(periodoPk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

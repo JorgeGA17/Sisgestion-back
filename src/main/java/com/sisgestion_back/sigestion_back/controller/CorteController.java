@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
 
-@PreAuthorize("hasRole('ADMIN')")
+
 public class CorteController {
     private final CorteService corteService;
 
@@ -29,6 +29,7 @@ public class CorteController {
    }
 
     @GetMapping("/{cortePk}")
+
     public ResponseEntity<CorteResponseDTO> getCorteById(@PathVariable Long cortePk) {
         CorteResponseDTO corte= corteService.getCorteById(cortePk);
         return new ResponseEntity<>(corte, HttpStatus.OK);
@@ -36,18 +37,21 @@ public class CorteController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CorteResponseDTO> createCorte(@Validated @RequestBody CorteRequestDTO corteDTO) {
         CorteResponseDTO createdCorte = corteService.createCorte(corteDTO);
         return new ResponseEntity<>(createdCorte, HttpStatus.CREATED);
     }
 
     @PutMapping("/{cortePk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CorteResponseDTO> updateCorte(@PathVariable Long cortePk, @Valid @RequestBody CorteRequestDTO corteDTO) {
         CorteResponseDTO uptdateCorte = corteService.updateCorte(cortePk,corteDTO);
         return new ResponseEntity<>(uptdateCorte, HttpStatus.OK);
     }
 
     @DeleteMapping("/{cortePk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteCorte(@PathVariable Long cortePk) {
         corteService.deleteCorte(cortePk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

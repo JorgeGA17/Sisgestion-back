@@ -66,7 +66,7 @@ public class ProyectoMapper {
         // Mapeo para relaciones ManyToOne (Corte y Estado)
         if (proyecto.getCortefk() != null) {
             proyectoResponseDTO.setCorteId(proyecto.getCortefk().getCortePk());
-            proyectoResponseDTO.setNombreCorte(proyecto.getCortefk().getXnombre());
+            proyectoResponseDTO.setNombreCorte(proyecto.getCortefk().getXnombreCorto());
         } else {
             proyectoResponseDTO.setCorteId(null);
             proyectoResponseDTO.setNombreCorte(null);

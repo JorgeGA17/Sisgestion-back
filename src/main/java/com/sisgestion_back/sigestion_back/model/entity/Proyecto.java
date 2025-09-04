@@ -61,7 +61,6 @@ public class Proyecto extends AuditableEntity {
     @JoinColumn(name = "estado_proyecto_fk")
     private Estado estadofk;
 
-
    @ManyToMany(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinTable(
             name = "especialidad_proyectos",
@@ -103,4 +102,3 @@ public class Proyecto extends AuditableEntity {
     )
     private List<Personal> personal;
 }
-

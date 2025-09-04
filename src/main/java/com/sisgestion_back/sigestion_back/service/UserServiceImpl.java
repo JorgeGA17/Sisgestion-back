@@ -138,6 +138,7 @@ public class UserServiceImpl implements UserService {
             personal.setNnumeroDocumento(userRegistrationDTO.getNnumeroDocumento());
             personal.setXocupacion(userRegistrationDTO.getXocupacion());
             personal.setXnombreCompleto(userRegistrationDTO.getXnombre()+ " " + userRegistrationDTO.getXapellido());
+            personal.setXcorreoInstitucional(userRegistrationDTO.getXcorreoInstitucional());
 
             personal.setUser(user);
             user.setPersonal(personal);
@@ -149,7 +150,7 @@ public class UserServiceImpl implements UserService {
             personal.setNnumeroDocumento(userRegistrationDTO.getNnumeroDocumento());
             personal.setXocupacion(userRegistrationDTO.getXocupacion());
             personal.setXnombreCompleto(userRegistrationDTO.getXnombre()+ " " + userRegistrationDTO.getXapellido());
-
+            personal.setXcorreoInstitucional(userRegistrationDTO.getXcorreoInstitucional());
             personal.setUser(user);
             user.setPersonal(personal);
         }
@@ -160,7 +161,7 @@ public class UserServiceImpl implements UserService {
             personal.setNnumeroDocumento(userRegistrationDTO.getNnumeroDocumento());
             personal.setXocupacion(userRegistrationDTO.getXocupacion());
             personal.setXnombreCompleto(userRegistrationDTO.getXnombre()+ " " + userRegistrationDTO.getXapellido());
-
+            personal.setXcorreoInstitucional(userRegistrationDTO.getXcorreoInstitucional());
             personal.setUser(user);
             user.setPersonal(personal);
         }

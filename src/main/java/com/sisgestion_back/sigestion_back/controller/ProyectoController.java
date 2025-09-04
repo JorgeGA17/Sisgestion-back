@@ -50,7 +50,7 @@ public class ProyectoController {
     }
 
     @DeleteMapping("/{proyectopk}")
-    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteProyecto(@PathVariable Long proyectopk) {
         proyectoService.deleteProyecto(proyectopk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

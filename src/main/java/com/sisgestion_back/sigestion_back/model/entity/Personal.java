@@ -39,6 +39,9 @@ public class Personal extends AuditableEntity {
     @Column(name = "x_ocupacion")
     private String xocupacion;
 
+    @Column(name = "x_correo_institucional", nullable = false, unique = true)
+    private String xcorreoInstitucional;
+
     @OneToMany (mappedBy = "personalfk", cascade = CascadeType.ALL)
     private List<Presidente> presidentes= new ArrayList<>();
 

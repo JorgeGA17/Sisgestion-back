@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
 
-@PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
+
 public class ComisionController {
 
     private final ComisionService comisionService;
@@ -36,18 +36,21 @@ public class ComisionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<ComisionResponseDTO> createComision(@Validated @RequestBody ComisionRequestDTO comisionDTO) {
         ComisionResponseDTO createdComision = comisionService.createComision(comisionDTO);
         return new ResponseEntity<>(createdComision, HttpStatus.CREATED);
     }
 
     @PutMapping("/{comisionPk}")
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<ComisionResponseDTO> updateComision(@PathVariable Long comisionPk, @Valid @RequestBody ComisionRequestDTO comisionDTO) {
         ComisionResponseDTO updatedComision = comisionService.updateComision(comisionPk, comisionDTO);
         return new ResponseEntity<>(updatedComision, HttpStatus.OK);
     }
 
     @DeleteMapping("/{comisionPk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteComision(@PathVariable Long comisionPk) {
         comisionService.deleteComision(comisionPk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

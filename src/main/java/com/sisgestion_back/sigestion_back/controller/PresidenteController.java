@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/Presidentes")
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
-@PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
 
 public class PresidenteController {
     private final PresidenteService presidenteService;
@@ -35,18 +34,21 @@ public class PresidenteController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<PresidenteResponseDTO> createPresidente(@Validated @RequestBody PresidenteRequestDTO presidenteDTO) {
         PresidenteResponseDTO createdPresidente = presidenteService.createPresidente(presidenteDTO);
         return new ResponseEntity<>(createdPresidente, HttpStatus.CREATED);
     }
 
     @PutMapping("/{presidentePk}")
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<PresidenteResponseDTO> updatePresidente(@PathVariable Long presidentePk, @Valid @RequestBody PresidenteRequestDTO presidenteDTO) {
         PresidenteResponseDTO updatedPresidente = presidenteService.updatePresidente(presidentePk, presidenteDTO);
         return new ResponseEntity<>(updatedPresidente, HttpStatus.OK);
     }
 
     @DeleteMapping("/{presidentePk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletePresidente(@PathVariable Long presidentePk) {
         presidenteService.deletePresidente(presidentePk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

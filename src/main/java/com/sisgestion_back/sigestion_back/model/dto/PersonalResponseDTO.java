@@ -20,6 +20,6 @@ public class PersonalResponseDTO {
     private String xnombre;
     private String xapellido;
     private String xocupacion;
-
-
+    private String xcorreoInstitucional;
 }
+

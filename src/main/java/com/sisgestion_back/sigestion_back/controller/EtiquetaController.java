@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin(originPatterns = "http://localhost:4200/")
 
-@PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
 public class EtiquetaController {
 
     private final EtiquetaService etiquetaService;
@@ -36,18 +35,21 @@ public class EtiquetaController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<EtiquetaResponseDTO> createEtiqueta(@Validated @RequestBody EtiquetaRequestDTO etiquetaDTO) {
         EtiquetaResponseDTO createdEtiqueta = etiquetaService.createEtiqueta(etiquetaDTO);
         return new ResponseEntity<>(createdEtiqueta, HttpStatus.CREATED);
     }
 
     @PutMapping("/{etiquetaPk}")
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARIO')")
     public ResponseEntity<EtiquetaResponseDTO> updateEtiqueta(@PathVariable Long etiquetaPk, @Valid @RequestBody EtiquetaRequestDTO etiquetaDTO) {
         EtiquetaResponseDTO updatedEtiqueta = etiquetaService.updateEtiqueta(etiquetaPk, etiquetaDTO);
         return new ResponseEntity<>(updatedEtiqueta, HttpStatus.OK);
     }
 
     @DeleteMapping("/{etiquetaPk}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteEtiqueta(@PathVariable Long etiquetaPk) {
         etiquetaService.deleteEtiqueta(etiquetaPk);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
